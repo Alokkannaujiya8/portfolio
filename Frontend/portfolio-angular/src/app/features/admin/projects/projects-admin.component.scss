@@ -1,0 +1,66 @@
+.crud-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.page-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+}
+.crud-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.form-card, .table-card {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border-radius: 16px !important;
+  padding: 16px;
+}
+mat-card-title {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+}
+.crud-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+.form-row {
+  display: flex;
+  gap: 16px;
+}
+.form-row mat-form-field {
+  flex: 1;
+}
+.checkbox-row {
+  margin: 8px 0;
+}
+.actions-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+.w-full {
+  width: 100%;
+}
+th.mat-mdc-header-cell {
+  color: #94a3b8;
+  font-weight: 600;
+}
+td.mat-mdc-cell {
+  color: #cbd5e1;
+}
+::ng-deep .mat-mdc-table {
+  background-color: transparent !important;
+}

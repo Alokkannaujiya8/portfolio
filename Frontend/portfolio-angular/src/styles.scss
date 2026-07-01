@@ -1,0 +1,238 @@
+// Include theming for Angular Material with `mat.theme()`.
+@use '@angular/material' as mat;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+html {
+  @include mat.theme((
+    color: (
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Inter,
+    density: 0,
+  ));
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', Roboto, sans-serif !important;
+  background-color: #0f172a;
+  color: #f8fafc;
+  transition: background-color 0.35s ease, color 0.35s ease;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 5px;
+  border: 2px solid #0f172a;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+body.dark-theme {
+  color-scheme: dark;
+  background-color: #0f172a;
+  color: #f8fafc;
+  --sidenav-bg: #1e293b;
+  --admin-content-bg: #0f172a;
+}
+
+body:not(.dark-theme) {
+  color-scheme: light;
+  background-color: #f8fafc;
+  color: #0f172a;
+  --sidenav-bg: #f8fafc;
+  --admin-content-bg: #ffffff;
+
+  // Custom light scrollbar
+  ::-webkit-scrollbar-track { background: #f8fafc; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border: 2px solid #f8fafc; }
+  ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+  // Component Overrides for Light Mode
+  .navbar-blur {
+    background: rgba(255, 255, 255, 0.8) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  .nav-logo {
+    color: #4f46e5;
+  }
+  .nav-links button {
+    color: #475569;
+  }
+  .nav-links button:hover {
+    color: #000000;
+  }
+  .admin-btn {
+    border-color: rgba(0, 0, 0, 0.15) !important;
+    color: #000000 !important;
+  }
+  
+  .hero-section {
+    background: #f8fafc;
+  }
+  .hero-title {
+    color: #0f172a;
+  }
+  .hero-subtitle {
+    color: #475569;
+  }
+  .hero-btn-stroked {
+    color: #0f172a !important;
+    border-color: rgba(0, 0, 0, 0.15) !important;
+  }
+  .hero-image-border {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+  }
+
+  .about-section {
+    background: #ffffff;
+  }
+  .section-title {
+    color: #0f172a;
+  }
+  .section-subtitle {
+    color: #475569;
+  }
+  .about-desc {
+    color: #334155;
+  }
+  .info-card {
+    background: rgba(0, 0, 0, 0.01) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  }
+  .info-val {
+    color: #0f172a;
+  }
+  .about-meta {
+    background: rgba(0, 0, 0, 0.01) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  }
+  .meta-value {
+    color: #334155;
+  }
+
+  .services-section {
+    background: #f1f5f9;
+  }
+  .service-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  }
+  .service-title {
+    color: #0f172a;
+  }
+  .service-desc {
+    color: #475569;
+  }
+
+  .skills-section {
+    background: #ffffff;
+  }
+  .skill-category {
+    background: rgba(0, 0, 0, 0.01) !important;
+    border: 1px solid rgba(0, 0, 0, 0.03) !important;
+  }
+  .category-title {
+    color: #0f172a;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  .skill-name {
+    color: #334155;
+  }
+
+  .timeline-section {
+    background: #f1f5f9;
+  }
+  .timeline-content {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.04) !important;
+  }
+  .timeline-title {
+    color: #0f172a;
+  }
+  .timeline-desc {
+    color: #475569;
+  }
+
+  .certificates-section {
+    background: #ffffff;
+  }
+  .cert-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  }
+  .cert-name {
+    color: #0f172a;
+  }
+  .cert-issuer {
+    color: #475569;
+  }
+
+  .projects-section {
+    background: #f1f5f9;
+  }
+  .project-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  }
+  .project-title {
+    color: #0f172a;
+  }
+  .project-desc {
+    color: #475569;
+  }
+  .tech-chip {
+    background: rgba(0, 0, 0, 0.04) !important;
+    color: #334155;
+  }
+
+  .gallery-section {
+    background: #ffffff;
+  }
+
+  .blogs-section {
+    background: #f1f5f9;
+  }
+  .blog-preview-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  }
+  .blog-preview-title {
+    color: #0f172a;
+  }
+  .blog-preview-desc {
+    color: #475569;
+  }
+
+  .contact-section {
+    background: #ffffff;
+  }
+  .contact-card-info h3 {
+    color: #0f172a;
+  }
+  .contact-card-info p {
+    color: #334155;
+  }
+  .contact-meta-item p {
+    color: #334155;
+  }
+  .contact-form-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+  }
+}

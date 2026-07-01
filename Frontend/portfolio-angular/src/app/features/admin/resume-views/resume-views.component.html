@@ -1,0 +1,81 @@
+<div class="resume-views-container">
+  <!-- PAGE HEADER -->
+  <div class="views-header-section">
+    <div class="page-title-row">
+      <mat-icon class="page-icon red-icon">picture_as_pdf</mat-icon>
+      <h1 class="page-title">Resume Views & Downloads</h1>
+    </div>
+  </div>
+
+  <!-- TABLE CARD -->
+  <div class="table-card">
+    <table class="views-table">
+      <thead>
+        <tr>
+          <th>Visitor Name</th>
+          <th>Email</th>
+          <th>Company</th>
+          <th>Designation</th>
+          <th>Location</th>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (dl of downloads(); track dl.id) {
+          <tr>
+            <!-- Visitor Name -->
+            <td>
+              <span class="visitor-name">{{ dl.visitorName }}</span>
+            </td>
+
+            <!-- Email -->
+            <td>
+              <span class="visitor-email">{{ dl.email }}</span>
+            </td>
+
+            <!-- Company -->
+            <td>
+              <span class="visitor-company">{{ dl.company || '' }}</span>
+            </td>
+
+            <!-- Designation -->
+            <td>
+              <span class="visitor-designation">{{ dl.designation || '' }}</span>
+            </td>
+
+            <!-- Location -->
+            <td>
+              <div class="location-cell">
+                <mat-icon class="loc-icon">location_on</mat-icon>
+                <span>{{ dl.location }}</span>
+              </div>
+            </td>
+
+            <!-- Date -->
+            <td>
+              <span class="date-text">
+                {{ dl.date | date:'MMM d, yyyy' }}
+                <small class="time-text">{{ dl.date | date:'HH:mm' }}</small>
+              </span>
+            </td>
+
+            <!-- Status -->
+            <td>
+              <span class="status-badge downloaded">
+                {{ dl.status }}
+              </span>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="7" class="no-data-cell">
+              <mat-icon>cloud_download</mat-icon>
+              <p>No resume downloads logged yet.</p>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

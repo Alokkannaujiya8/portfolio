@@ -1,0 +1,148 @@
+<div class="admin-container">
+  <mat-toolbar class="admin-header">
+    <button mat-icon-button (click)="sidenav.toggle()" class="toggle-btn">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div class="header-breadcrumbs">
+      <span class="page-title-main">Dashboard</span>
+      <span class="breadcrumbs-path">Dashboard / Dashboard</span>
+    </div>
+    
+    <span class="spacer"></span>
+    
+    <div class="header-actions">
+      <!-- Refresh Button -->
+      <button mat-icon-button class="header-action-btn" title="Refresh">
+        <mat-icon>refresh</mat-icon>
+      </button>
+
+      <!-- Theme Toggle Button -->
+      <button mat-icon-button (click)="themeService.toggleTheme()" class="header-action-btn" title="Toggle Theme">
+        <mat-icon>{{ themeService.isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+      </button>
+      
+      <!-- User Profile Dropdown Button -->
+      <button mat-button [matMenuTriggerFor]="profileMenu" class="admin-profile-btn">
+        <div class="avatar-circle">
+          <mat-icon class="avatar-icon">person</mat-icon>
+        </div>
+        <div class="admin-user-info">
+          <span class="admin-username">Alok</span>
+          <span class="admin-role">Administrator</span>
+        </div>
+        <mat-icon class="chevron-icon">keyboard_arrow_down</mat-icon>
+      </button>
+      <mat-menu #profileMenu="matMenu" class="custom-admin-menu">
+        <div class="menu-profile-header">
+          <div class="menu-avatar-circle">
+            <mat-icon>person</mat-icon>
+          </div>
+          <div class="menu-user-info">
+            <span class="menu-username">Alok</span>
+            <span class="menu-role">Administrator</span>
+          </div>
+        </div>
+        <hr class="menu-divider" style="border: 0; border-top: 1px solid rgba(255,255,255,0.05); margin: 8px 0;" />
+        <a mat-menu-item routerLink="/admin/dashboard">
+          <mat-icon>dashboard</mat-icon>
+          <span>Dashboard</span>
+        </a>
+        <a mat-menu-item routerLink="/admin/profile">
+          <mat-icon>person</mat-icon>
+          <span>Profile</span>
+        </a>
+        <a mat-menu-item routerLink="/admin/settings">
+          <mat-icon>settings</mat-icon>
+          <span>Settings</span>
+        </a>
+        <hr class="menu-divider" style="border: 0; border-top: 1px solid rgba(255,255,255,0.05); margin: 8px 0;" />
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
+  </mat-toolbar>
+  
+  <mat-sidenav-container class="admin-sidenav-container">
+    <mat-sidenav #sidenav mode="side" opened class="admin-sidenav">
+      <!-- Logo Section at top of Sidenav -->
+      <div class="sidenav-logo-section">
+        <div class="sidenav-logo">
+          <span class="logo-symbol">&lt;/&gt;</span>
+          <span class="logo-text">AdminPanel</span>
+        </div>
+      </div>
+
+      <mat-nav-list class="sidenav-nav-list">
+        <a mat-list-item routerLink="/admin/dashboard" routerLinkActive="active-link">
+          <mat-icon matListItemIcon>dashboard</mat-icon>
+          <span matListItemTitle>Dashboard</span>
+        </a>
+        <a mat-list-item routerLink="/admin/profile" routerLinkActive="active-link">
+          <mat-icon matListItemIcon>person</mat-icon>
+          <span matListItemTitle>Profile</span>
+        </a>
+        <a mat-list-item routerLink="/admin/skills" routerLinkActive="active-link">
+          <mat-icon matListItemIcon>format_list_bulleted</mat-icon>
+          <span matListItemTitle>Skills</span>
+        </a>
+        <a mat-list-item routerLink="/admin/projects" routerLinkActive="active-link">
+          <mat-icon matListItemIcon>account_tree</mat-icon>
+          <span matListItemTitle>Projects</span>
+        </a>
+        <a mat-list-item routerLink="/admin/experience" routerLinkActive="active-link">
+          <mat-icon matListItemIcon>business_center</mat-icon>
+          <span matListItemTitle>Experience</span>
+        </a>
+        <a mat-list-item routerLink="/admin/education" routerLinkActive="active-link">
+          <mat-icon matListItemIcon>school</mat-icon>
+          <span matListItemTitle>Education</span>
+        </a>
+        <a mat-list-item routerLink="/admin/blogs" routerLinkActive="active-link">
+          <mat-icon matListItemIcon>menu_book</mat-icon>
+          <span matListItemTitle>Blog Posts</span>
+        </a>
+        <a mat-list-item routerLink="/admin/categories" routerLinkActive="active-link">
+          <mat-icon matListItemIcon>category</mat-icon>
+          <span matListItemTitle>Categories</span>
+        </a>
+        <a mat-list-item routerLink="/admin/comments" routerLinkActive="active-link">
+          <mat-icon matListItemIcon>comment</mat-icon>
+          <span matListItemTitle>Comments</span>
+        </a>
+        <a mat-list-item routerLink="/admin/gallery" routerLinkActive="active-link">
+          <mat-icon matListItemIcon>photo_library</mat-icon>
+          <span matListItemTitle>Gallery Items</span>
+        </a>
+        <a mat-list-item routerLink="/admin/messages" routerLinkActive="active-link">
+          <mat-icon matListItemIcon>email</mat-icon>
+          <span matListItemTitle>Messages</span>
+        </a>
+        <a mat-list-item routerLink="/admin/resume-views" routerLinkActive="active-link">
+          <mat-icon matListItemIcon>picture_as_pdf</mat-icon>
+          <span matListItemTitle>Resume Views</span>
+        </a>
+        <a mat-list-item routerLink="/admin/creator-views" routerLinkActive="active-link">
+          <mat-icon matListItemIcon>video_camera_front</mat-icon>
+          <span matListItemTitle>Creator Views</span>
+        </a>
+        <hr class="nav-divider" />
+        <a mat-list-item routerLink="/" target="_blank">
+          <mat-icon matListItemIcon>open_in_new</mat-icon>
+          <span matListItemTitle>View Site</span>
+        </a>
+        <button mat-list-item (click)="logout()">
+          <mat-icon matListItemIcon>logout</mat-icon>
+          <span matListItemTitle>Logout</span>
+        </button>
+      </mat-nav-list>
+    </mat-sidenav>
+    
+    <mat-sidenav-content class="admin-content-wrapper">
+      <div class="admin-main">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

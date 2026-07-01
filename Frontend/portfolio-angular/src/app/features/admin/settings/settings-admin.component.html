@@ -1,0 +1,199 @@
+<div class="settings-container">
+  <!-- PAGE HEADER -->
+  <div class="settings-header-section">
+    <div class="page-title-row">
+      <mat-icon class="page-icon">settings</mat-icon>
+      <h1 class="page-title">Settings</h1>
+    </div>
+    <div class="breadcrumbs">
+      <a routerLink="/admin/dashboard" class="breadcrumb-link">Dashboard</a>
+      <span class="separator">/</span>
+      <span class="current">Settings</span>
+    </div>
+  </div>
+
+  <div class="settings-grid">
+    <!-- LEFT COLUMN: Account Security -->
+    <div class="settings-card security-card">
+      <div class="card-header">
+        <mat-icon class="card-header-icon">security</mat-icon>
+        <h2>Account Security</h2>
+      </div>
+
+      <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()" class="settings-form">
+        <!-- SECTION 1: VERIFY CURRENT CREDENTIALS -->
+        <div class="form-section">
+          <div class="section-title">
+            <mat-icon>lock</mat-icon>
+            <span>VERIFY CURRENT CREDENTIALS</span>
+          </div>
+
+          <div class="form-row">
+            <!-- Current Username -->
+            <div class="form-group flex-1">
+              <label>Current Username</label>
+              <div class="input-wrapper disabled">
+                <mat-icon class="input-prefix-icon">person</mat-icon>
+                <input type="text" formControlName="currentUsername" />
+              </div>
+            </div>
+
+            <!-- Current Password -->
+            <div class="form-group flex-1">
+              <label>Current Password</label>
+              <div class="input-wrapper">
+                <mat-icon class="input-prefix-icon">lock</mat-icon>
+                <input [type]="hideCurrentPassword() ? 'password' : 'text'" formControlName="currentPassword" placeholder="Current password" />
+                <button type="button" class="eye-toggle-btn" (click)="hideCurrentPassword.set(!hideCurrentPassword())">
+                  <mat-icon>{{ hideCurrentPassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+              </div>
+              @if (settingsForm.get('currentPassword')?.touched && settingsForm.get('currentPassword')?.invalid) {
+                <span class="error-text">Current password is required to verify identity</span>
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: UPDATE CREDENTIALS -->
+        <div class="form-section">
+          <div class="section-title">
+            <mat-icon>edit</mat-icon>
+            <span>UPDATE CREDENTIALS</span>
+          </div>
+
+          <!-- New Username -->
+          <div class="form-group">
+            <label>New Username</label>
+            <div class="input-wrapper">
+              <mat-icon class="input-prefix-icon">person</mat-icon>
+              <input type="email" formControlName="newUsername" placeholder="Enter new username/email" />
+            </div>
+            <span class="help-text">Leave same as current if you don't want to change username.</span>
+            @if (settingsForm.get('newUsername')?.touched && settingsForm.get('newUsername')?.invalid) {
+              <span class="error-text">Please enter a valid email address for username</span>
+            }
+          </div>
+
+          <div class="form-row">
+            <!-- New Password (optional) -->
+            <div class="form-group flex-1">
+              <label>New Password (optional)</label>
+              <div class="input-wrapper">
+                <mat-icon class="input-prefix-icon">vpn_key</mat-icon>
+                <input [type]="hideNewPassword() ? 'password' : 'text'" formControlName="newPassword" placeholder="Leave blank to keep current" />
+                <button type="button" class="eye-toggle-btn" (click)="hideNewPassword.set(!hideNewPassword())">
+                  <mat-icon>{{ hideNewPassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+              </div>
+              @if (settingsForm.get('newPassword')?.touched && settingsForm.get('newPassword')?.hasError('minlength')) {
+                <span class="error-text">New password must be at least 8 characters long</span>
+              }
+            </div>
+
+            <!-- Confirm New Password -->
+            <div class="form-group flex-1">
+              <label>Confirm New Password</label>
+              <div class="input-wrapper">
+                <mat-icon class="input-prefix-icon">vpn_key</mat-icon>
+                <input [type]="hideConfirmPassword() ? 'password' : 'text'" formControlName="confirmNewPassword" placeholder="Repeat new password" />
+                <button type="button" class="eye-toggle-btn" (click)="hideConfirmPassword.set(!hideConfirmPassword())">
+                  <mat-icon>{{ hideConfirmPassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+              </div>
+              @if (settingsForm.get('confirmNewPassword')?.touched && settingsForm.get('confirmNewPassword')?.hasError('mismatch')) {
+                <span class="error-text">Passwords do not match</span>
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- FORM ACTIONS -->
+        <div class="form-actions-row">
+          <button type="submit" class="submit-btn" [disabled]="settingsForm.invalid || isLoading()">
+            <mat-icon>save</mat-icon>
+            {{ isLoading() ? 'Saving...' : 'Save Changes' }}
+          </button>
+          <button type="button" class="cancel-btn" (click)="onCancel()" [disabled]="isLoading()">
+            <mat-icon>close</mat-icon>
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="info-column">
+      <!-- Card 1: Account Info -->
+      <div class="settings-card info-card">
+        <div class="card-header">
+          <mat-icon class="card-header-icon">info</mat-icon>
+          <h2>Account Info</h2>
+        </div>
+        <div class="info-card-body">
+          <div class="profile-avatar-section">
+            <div class="profile-avatar-circle">
+              <mat-icon class="shield-badge-icon">admin_panel_settings</mat-icon>
+            </div>
+            <div class="profile-text-details">
+              <span class="profile-display-name">Alok</span>
+              <span class="profile-role-pill">Administrator</span>
+            </div>
+          </div>
+          
+          <div class="account-details-list">
+            <div class="detail-item">
+              <mat-icon class="success-icon">check_circle</mat-icon>
+              <div class="detail-text">
+                <span class="detail-label">Two-factor authentication:</span>
+                <span class="detail-val text-green">Not enabled</span>
+              </div>
+            </div>
+            <div class="detail-item">
+              <mat-icon class="blue-icon">schedule</mat-icon>
+              <div class="detail-text">
+                <span class="detail-label">Last login:</span>
+                <span class="detail-val">{{ currentLoginTime | date:'M/d/yyyy h:mm:ss a' }}</span>
+              </div>
+            </div>
+            <div class="detail-item">
+              <mat-icon class="blue-icon">dns</mat-icon>
+              <div class="detail-text">
+                <span class="detail-label">Credentials stored in:</span>
+                <span class="detail-val">Database</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Security Tips -->
+      <div class="settings-card tips-card">
+        <div class="card-header">
+          <mat-icon class="card-header-icon yellow-text">lightbulb</mat-icon>
+          <h2>Security Tips</h2>
+        </div>
+        <div class="tips-card-body">
+          <ul class="tips-list">
+            <li>
+              <span class="bullet"></span>
+              <span>Use at least 8 characters in password</span>
+            </li>
+            <li>
+              <span class="bullet"></span>
+              <span>Mix letters, numbers & symbols</span>
+            </li>
+            <li>
+              <span class="bullet"></span>
+              <span>Avoid using the same password twice</span>
+            </li>
+            <li>
+              <span class="bullet"></span>
+              <span>Update credentials regularly</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

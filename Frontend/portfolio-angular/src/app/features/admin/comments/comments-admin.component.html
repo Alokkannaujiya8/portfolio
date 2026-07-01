@@ -1,0 +1,210 @@
+<div class="comments-container">
+  <!-- PAGE HEADER -->
+  <div class="comments-header-section">
+    <div class="page-title-row">
+      <mat-icon class="page-icon">forum</mat-icon>
+      <h1 class="page-title">Blog Comments</h1>
+    </div>
+    
+    <div class="stats-badges">
+      <span class="badge pending-badge">Pending: {{ pendingCount() }}</span>
+      <span class="badge approved-badge">Approved: {{ approvedCount() }}</span>
+    </div>
+  </div>
+
+  <!-- TABS NAV -->
+  <div class="tabs-nav">
+    <button [class.active]="activeTab() === 'all'" (click)="setTab('all')">All Comments</button>
+    <button [class.active]="activeTab() === 'pending'" (click)="setTab('pending')">Pending Approval</button>
+    <button [class.active]="activeTab() === 'approved'" (click)="setTab('approved')">Approved</button>
+  </div>
+
+  <!-- TABLE CARD -->
+  <div class="table-card">
+    <table class="comments-table">
+      <thead>
+        <tr>
+          <th>Author</th>
+          <th>Comment</th>
+          <th>Post</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (comment of filteredComments(); track comment.id) {
+          <tr>
+            <!-- Author column -->
+            <td>
+              <div class="author-cell">
+                <div class="avatar-circle">
+                  <span>{{ getAvatarLetter(comment.authorName) }}</span>
+                </div>
+                <div class="author-info">
+                  <span class="author-name">{{ comment.authorName }}</span>
+                  <span class="author-email">{{ comment.authorEmail }}</span>
+                </div>
+              </div>
+            </td>
+
+            <!-- Comment column -->
+            <td>
+              <span class="comment-content">{{ comment.content }}</span>
+            </td>
+
+            <!-- Post column -->
+            <td>
+              <span class="post-badge">{{ comment.postTitle }}</span>
+            </td>
+
+            <!-- Date column -->
+            <td>
+              <span class="comment-date">{{ comment.date }}</span>
+            </td>
+
+            <!-- Status column -->
+            <td>
+              <span class="status-badge" [class.approved]="comment.status === 'Approved'" [class.pending]="comment.status === 'Pending'">
+                {{ comment.status }}
+              </span>
+            </td>
+
+            <!-- Actions column -->
+            <td>
+              <div class="actions-cell">
+                <!-- View Button (Cyan) -->
+                <button class="action-btn view-btn" title="View details" (click)="viewComment(comment)">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+                <!-- Reply Button (Gradient) -->
+                <button class="action-btn toggle-btn" title="Reply to Comment" (click)="openReply(comment)">
+                  <mat-icon>reply</mat-icon>
+                </button>
+                <!-- Delete Button (Red) -->
+                <button class="action-btn delete-btn" title="Delete comment" (click)="deleteComment(comment)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="6" class="no-data-cell">
+              <mat-icon>rate_review</mat-icon>
+              <p>No comments found under this tab.</p>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- REPLY TO COMMENT DIALOG TEMPLATE -->
+<ng-template #replyDialog>
+  <div class="dialog-container reply-dialog">
+    <div class="dialog-header reply-header">
+      <div class="header-title">
+        <mat-icon>reply</mat-icon>
+        <span>Reply to Comment</span>
+      </div>
+      <button class="close-icon-btn" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    
+    <div class="dialog-body">
+      <div class="dialog-form-group">
+        <label>Your Name</label>
+        <input type="text" [(ngModel)]="replyName" class="dialog-input" readonly />
+      </div>
+      <div class="dialog-form-group">
+        <label>Your Email</label>
+        <input type="email" [(ngModel)]="replyEmail" class="dialog-input" readonly />
+      </div>
+      <div class="dialog-form-group">
+        <label>Reply</label>
+        <textarea rows="4" [(ngModel)]="replyText" class="dialog-textarea" [placeholder]="'Reply to ' + selectedComment()?.authorName + '...'"></textarea>
+      </div>
+    </div>
+    
+    <div class="dialog-actions">
+      <button class="dialog-btn cancel-btn" mat-dialog-close>Cancel</button>
+      <button class="dialog-btn submit-btn" (click)="sendReply()" [disabled]="!replyText.trim()">
+        <mat-icon>send</mat-icon>
+        Send Reply
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<!-- COMMENT DETAILS DIALOG TEMPLATE -->
+<ng-template #detailsDialog>
+  <div class="dialog-container details-dialog">
+    <div class="dialog-header details-header">
+      <div class="header-title">
+        <mat-icon>chat</mat-icon>
+        <span>Comment Details</span>
+      </div>
+      <button class="close-icon-btn" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    
+    <div class="dialog-body grid-body">
+      <div class="detail-row">
+        <div class="detail-col">
+          <span class="detail-lbl">Name:</span>
+          <span class="detail-val">{{ selectedComment()?.authorName }}</span>
+        </div>
+        <div class="detail-col">
+          <span class="detail-lbl">Email:</span>
+          <span class="detail-val">{{ selectedComment()?.authorEmail }}</span>
+        </div>
+      </div>
+      
+      <div class="detail-row">
+        <div class="detail-col full-width">
+          <span class="detail-lbl">Website:</span>
+          <span class="detail-val">N/A</span>
+        </div>
+      </div>
+      
+      <div class="detail-row">
+        <div class="detail-col">
+          <span class="detail-lbl">Post:</span>
+          <span class="detail-val">{{ selectedComment()?.postTitle }}</span>
+        </div>
+        <div class="detail-col">
+          <span class="detail-lbl">Date:</span>
+          <span class="detail-val">{{ selectedComment()?.date }}</span>
+        </div>
+      </div>
+      
+      <div class="detail-row">
+        <div class="detail-col">
+          <span class="detail-lbl">IP Address:</span>
+          <span class="detail-val">47.9.151.148</span>
+        </div>
+        <div class="detail-col">
+          <span class="detail-lbl">Status:</span>
+          <span class="status-badge approved">{{ selectedComment()?.status }}</span>
+        </div>
+      </div>
+      
+      <div class="detail-row comment-content-row">
+        <div class="detail-col full-width">
+          <span class="detail-lbl">Comment:</span>
+          <div class="comment-text-box">
+            {{ selectedComment()?.content }}
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="dialog-actions right-align">
+      <button class="dialog-btn close-btn" mat-dialog-close>Close</button>
+    </div>
+  </div>
+</ng-template>

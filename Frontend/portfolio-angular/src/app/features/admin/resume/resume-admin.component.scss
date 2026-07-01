@@ -1,0 +1,99 @@
+.crud-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.page-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+}
+.crud-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.form-card, .table-card {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border-radius: 16px !important;
+  padding: 16px;
+}
+mat-card-title {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+}
+mat-card-subtitle {
+  color: #94a3b8;
+}
+.upload-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+.dropzone {
+  border: 2px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.01);
+  transition: background 0.3s ease, border-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.dropzone:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: #6366f1;
+}
+.upload-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: #818cf8;
+}
+.dropzone p {
+  color: #cbd5e1;
+  margin: 0;
+  font-size: 14px;
+}
+.file-name {
+  color: #34d399;
+  font-weight: 600;
+  font-size: 13px;
+}
+.hidden-input {
+  display: none;
+}
+.upload-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+.w-full {
+  width: 100%;
+}
+th.mat-mdc-header-cell {
+  color: #94a3b8;
+  font-weight: 600;
+}
+td.mat-mdc-cell {
+  color: #cbd5e1;
+}
+::ng-deep .mat-mdc-table {
+  background-color: transparent !important;
+}
+.active-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 12px;
+}

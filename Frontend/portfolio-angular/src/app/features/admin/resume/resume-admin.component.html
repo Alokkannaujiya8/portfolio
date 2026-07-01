@@ -1,0 +1,74 @@
+<div class="crud-container">
+  <h1 class="page-title">Manage Resumes</h1>
+
+  <div class="crud-grid">
+    <!-- UPLOAD SECTION -->
+    <mat-card class="form-card">
+      <mat-card-header>
+        <mat-card-title>Upload New Resume</mat-card-title>
+        <mat-card-subtitle>Upload a PDF resume. It will automatically be activated as the active resume.</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content class="upload-content">
+        <div class="dropzone" (click)="fileInput.click()">
+          <mat-icon class="upload-icon">upload_file</mat-icon>
+          <p>Click here to select a PDF resume file to upload</p>
+          <span class="file-name" *ngIf="selectedFile()">Selected: {{ selectedFile()?.name }}</span>
+        </div>
+        <input type="file" #fileInput class="hidden-input" (change)="onFileSelected($event)" accept=".pdf" />
+        
+        <div class="upload-actions" *ngIf="selectedFile()">
+          <button mat-button (click)="onClearFile()">Clear</button>
+          <button mat-flat-button color="primary" (click)="onUpload()" [disabled]="isUploading()">
+            {{ isUploading() ? 'Uploading...' : 'Upload PDF' }}
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- RESUMES TABLE -->
+    <mat-card class="table-card">
+      <mat-card-header>
+        <mat-card-title>All Uploaded Resumes</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <table mat-table [dataSource]="resumes()" class="w-full">
+          <!-- Name Column -->
+          <ng-container matColumnDef="fileName">
+            <th mat-header-cell *matHeaderCellDef> File Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.fileName}} </td>
+          </ng-container>
+
+          <!-- Upload Date Column -->
+          <ng-container matColumnDef="createdAt">
+            <th mat-header-cell *matHeaderCellDef> Uploaded At </th>
+            <td mat-cell *matCellDef="let element"> {{element.createdAt | date:'MMM d, yyyy h:mm a'}} </td>
+          </ng-container>
+
+          <!-- Active Status Column -->
+          <ng-container matColumnDef="isActive">
+            <th mat-header-cell *matHeaderCellDef> Active </th>
+            <td mat-cell *matCellDef="let element">
+              <span class="active-badge" *ngIf="element.isActive">Active</span>
+              <button mat-stroked-button color="primary" *ngIf="!element.isActive" (click)="onActivate(element.id)">
+                Activate
+              </button>
+            </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button color="warn" (click)="onDelete(element.id)" [disabled]="element.isActive" title="Delete">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,159 @@
+<div class="messages-container">
+  <!-- PAGE HEADER -->
+  <div class="messages-header-section">
+    <div class="page-title-row">
+      <mat-icon class="page-icon">email</mat-icon>
+      <h1 class="page-title">Contact Messages</h1>
+    </div>
+  </div>
+
+  @if (isLoading()) {
+    <mat-progress-bar mode="indeterminate" class="mb-4"></mat-progress-bar>
+  }
+
+  <!-- TABLE CARD -->
+  <div class="table-card">
+    <table class="messages-table">
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Subject</th>
+          <th>Message</th>
+          <th>Date</th>
+          <th>IP Address</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (msg of messages(); track msg.id) {
+          <tr>
+            <!-- Status Badge -->
+            <td>
+              <span class="status-badge" [class.read]="msg.isRead" [class.unread]="!msg.isRead">
+                {{ msg.isRead ? 'Read' : 'Unread' }}
+              </span>
+            </td>
+
+            <!-- Name -->
+            <td>
+              <div class="name-cell">
+                <span class="user-name-text">{{ msg.name }}</span>
+              </div>
+            </td>
+
+            <!-- Email -->
+            <td>
+              <span class="email-text">{{ msg.email }}</span>
+            </td>
+
+            <!-- Subject -->
+            <td>
+              <span class="subject-text">{{ msg.subject }}</span>
+            </td>
+
+            <!-- Message preview -->
+            <td>
+              <span class="message-preview">{{ msg.message }}</span>
+            </td>
+
+            <!-- Date -->
+            <td>
+              <span class="date-text">{{ msg.createdAt | date:'MMM d, yyyy HH:mm' }}</span>
+            </td>
+
+            <!-- IP Address -->
+            <td>
+              <span class="ip-text">{{ msg.ipAddress }}</span>
+            </td>
+
+            <!-- Actions -->
+            <td>
+              <div class="actions-cell">
+                <button class="action-btn view-btn" title="View Details" (click)="viewMessage(msg)">
+                  <mat-icon>visibility</mat-icon>
+                </button>
+              </div>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="8" class="no-data-cell">
+              <mat-icon>mail_outline</mat-icon>
+              <p>No messages received yet.</p>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- MESSAGE DETAILS DIALOG TEMPLATE -->
+<ng-template #detailsDialog>
+  <div class="dialog-container details-dialog">
+    <div class="dialog-header details-header">
+      <div class="header-title">
+        <mat-icon>email</mat-icon>
+        <span>Message Details</span>
+      </div>
+      <button class="close-icon-btn" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    
+    <div class="dialog-body grid-body">
+      <div class="detail-row">
+        <div class="detail-col">
+          <span class="detail-lbl">Sender Name:</span>
+          <span class="detail-val">{{ selectedMessage()?.name }}</span>
+        </div>
+        <div class="detail-col">
+          <span class="detail-lbl">Email Address:</span>
+          <span class="detail-val">{{ selectedMessage()?.email }}</span>
+        </div>
+      </div>
+      
+      <div class="detail-row">
+        <div class="detail-col full-width">
+          <span class="detail-lbl">Subject:</span>
+          <span class="detail-val">{{ selectedMessage()?.subject }}</span>
+        </div>
+      </div>
+      
+      <div class="detail-row">
+        <div class="detail-col">
+          <span class="detail-lbl">Received Date:</span>
+          <span class="detail-val">{{ selectedMessage()?.createdAt | date:'MMM d, yyyy HH:mm:ss' }}</span>
+        </div>
+        <div class="detail-col">
+          <span class="detail-lbl">IP Address:</span>
+          <span class="detail-val">{{ selectedMessage()?.ipAddress }}</span>
+        </div>
+      </div>
+      
+      <div class="detail-row">
+        <div class="detail-col">
+          <span class="detail-lbl">Status:</span>
+          <span class="status-badge" [class.read]="selectedMessage()?.isRead" [class.unread]="!selectedMessage()?.isRead">
+            {{ selectedMessage()?.isRead ? 'Read' : 'Unread' }}
+          </span>
+        </div>
+      </div>
+      
+      <div class="detail-row comment-content-row">
+        <div class="detail-col full-width">
+          <span class="detail-lbl">Message:</span>
+          <div class="comment-text-box">
+            {{ selectedMessage()?.message }}
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="dialog-actions right-align">
+      <button class="dialog-btn close-btn" mat-dialog-close>Close</button>
+    </div>
+  </div>
+</ng-template>

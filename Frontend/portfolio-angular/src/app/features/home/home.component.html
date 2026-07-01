@@ -1,0 +1,577 @@
+<!-- HERO SECTION -->
+<section id="hero" class="hero-section">
+  <div class="glow-orb main-orb"></div>
+  <div class="glow-orb sub-orb"></div>
+  <div class="hero-container">
+    <div class="hero-content">
+      <span class="badge">
+        <span class="badge-icon">&lt;/&gt;</span>
+        Welcome to My Portfolio
+      </span>
+      <h1 class="hero-title">
+        {{ getFormattedTitle().prefix }}<span class="highlight-cyan">{{ getFormattedTitle().name }}</span>
+      </h1>
+      <h2 class="hero-subtitle">
+        I'm a <span class="highlight-yellow">{{ displayedRole() }}</span><span class="typewriter-cursor">|</span>
+      </h2>
+      <p class="hero-description">
+        {{ about()?.description || 'I am a Full Stack Developer and AI/ML enthusiast with experience in .NET technologies.' }}
+      </p>
+      <div class="hero-actions">
+        <button mat-flat-button class="hero-btn hero-btn-primary" (click)="scrollTo('projects')">
+          <mat-icon>send</mat-icon>
+          {{ hero()?.primaryButtonText || 'Hire Me' }}
+        </button>
+        <button mat-stroked-button class="hero-btn-stroked" (click)="openDownloadModal()">
+          <mat-icon>download</mat-icon>
+          {{ hero()?.secondaryButtonText || 'Download CV' }}
+        </button>
+      </div>
+
+      <!-- Social Links under buttons as shown in user screenshot -->
+      <div class="hero-social-links">
+        <a href="https://linkedin.com/in/alok8" target="_blank" class="social-link" title="LinkedIn">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </a>
+        <a href="https://github.com/Alokkannaujiya8" target="_blank" class="social-link" title="GitHub">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        </a>
+        <a href="https://twitter.com" target="_blank" class="social-link" title="Twitter">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="https://instagram.com" target="_blank" class="social-link" title="Instagram">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+      </div>
+      
+      <!-- Scroll Down Indicator -->
+      <div class="scroll-down-wrapper" (click)="scrollTo('about')">
+        <span class="scroll-down-text">SCROLL DOWN</span>
+        <mat-icon class="scroll-down-icon">keyboard_arrow_down</mat-icon>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT SECTION -->
+<section id="about" class="about-section">
+  <div class="section-container">
+    <div class="section-header">
+      <span class="section-badge">Get to Know Me</span>
+      <h2 class="section-title">About Me</h2>
+    </div>
+    
+    <div class="about-grid-new">
+      <!-- Left Column: Photo and Stats Badges -->
+      <div class="about-image-column">
+        <div class="about-image-wrapper">
+          <div class="rotated-border"></div>
+          <img [src]="hero()?.imageUrl ? getFullUrl(hero().imageUrl) : 'assets/images/placeholder.jpg'" 
+               alt="Profile picture" class="profile-img" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300'" />
+          
+          <!-- Floating badge: Projects Done (Top-Right) -->
+          <div class="floating-badge-card projects-badge">
+            <div class="badge-icon-circle green">
+              <mat-icon>rocket_launch</mat-icon>
+            </div>
+            <div class="badge-text-info">
+              <span class="badge-val">{{ projects().length }}</span>
+              <span class="badge-lbl">Projects Done</span>
+            </div>
+          </div>
+          
+          <!-- Floating badge: Total Experience (Bottom-Left) -->
+          <div class="floating-badge-card experience-badge">
+            <div class="badge-icon-circle blue">
+              <mat-icon>business_center</mat-icon>
+            </div>
+            <div class="badge-text-info">
+              <span class="badge-val">{{ getTotalExperienceYears() }}+</span>
+              <span class="badge-lbl-title">Total Experience</span>
+              <span class="badge-lbl-sub">{{ getTotalExperienceString() }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right Column: Text & Meta Details -->
+      <div class="about-details-column">
+        <h3 class="about-heading-title">I'm <span class="highlight-cyan">{{ getFormattedTitle().name }}</span></h3>
+        <h4 class="about-subheading">{{ hero()?.subtitle }}</h4>
+        <p class="about-text-desc">
+          {{ about()?.description || 'I am a Full Stack Developer and AI/ML enthusiast with experience in .NET technologies.' }}
+        </p>
+        
+        <div class="about-meta-grid">
+          <div class="meta-item">
+            <mat-icon class="meta-icon">email</mat-icon>
+            <div class="meta-content">
+              <span class="meta-label">Email</span>
+              <span class="meta-value">{{ about()?.email || 'N/A' }}</span>
+            </div>
+          </div>
+          <div class="meta-item">
+            <mat-icon class="meta-icon">phone</mat-icon>
+            <div class="meta-content">
+              <span class="meta-label">Phone</span>
+              <span class="meta-value">{{ about()?.phone || 'N/A' }}</span>
+            </div>
+          </div>
+          <div class="meta-item">
+            <mat-icon class="meta-icon">location_on</mat-icon>
+            <div class="meta-content">
+              <span class="meta-label">Location</span>
+              <span class="meta-value">{{ about()?.location || 'Remote' }}</span>
+            </div>
+          </div>
+          <div class="meta-item">
+            <mat-icon class="meta-icon">public</mat-icon>
+            <div class="meta-content">
+              <span class="meta-label">Freelance</span>
+              <span class="meta-value">Available</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="about-actions">
+          <button mat-flat-button class="about-btn-primary" (click)="scrollTo('contact')">
+            <mat-icon>send</mat-icon> Contact Me
+          </button>
+          <button mat-stroked-button class="about-btn-stroked" (click)="openDownloadModal()">
+            <mat-icon>download</mat-icon> Download Resume
+          </button>
+        </div>
+      </div>
+      
+      <!-- Full-width Work History Section under Grid -->
+      <div class="about-work-history-full" *ngIf="experiences().length > 0">
+        <h4 class="work-history-full-title">📌 Work History</h4>
+        <div class="work-history-full-list">
+          @for (exp of experiences(); track exp.id) {
+            <div class="work-history-full-item">
+              <div class="work-history-full-left">
+                <div class="work-history-full-role-row">
+                  <span class="work-history-full-role">{{ exp.role }}</span>
+                  <span class="work-history-full-company">{{ exp.company }}</span>
+                </div>
+                <div class="work-history-full-meta-row">
+                  <mat-icon class="calendar-icon">calendar_today</mat-icon>
+                  <span class="work-history-full-dates">
+                    {{ exp.startDate | date:'MMM yyyy' }} - {{ exp.isCurrent || !exp.endDate ? 'Present' : (exp.endDate | date:'MMM yyyy') }}
+                  </span>
+                  <span class="work-history-full-badge">
+                    {{ getExperienceDuration(exp.startDate, exp.endDate, exp.isCurrent) }}
+                  </span>
+                </div>
+              </div>
+              
+              <div class="work-history-full-right">
+                <span class="work-history-full-duration-right">
+                  {{ getExperienceDuration(exp.startDate, exp.endDate, exp.isCurrent) }}
+                </span>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES SECTION -->
+<section id="services" class="services-section">
+  <div class="section-container">
+    <div class="section-header">
+      <span class="section-badge">Capabilities</span>
+      <h2 class="section-title">What I Offer</h2>
+    </div>
+    <div class="services-grid">
+      @for (service of services(); track service.id) {
+        <mat-card class="service-card hover-lift">
+          <mat-card-header>
+            <div class="service-icon-container">
+              <mat-icon>{{ service.icon || 'star' }}</mat-icon>
+            </div>
+          </mat-card-header>
+          <mat-card-content>
+            <h3 class="service-title">{{ service.title }}</h3>
+            <p class="service-desc">{{ service.description }}</p>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS SECTION -->
+<section id="skills" class="skills-section">
+  <div class="section-container">
+    <div class="section-header">
+      <span class="section-badge">What I'm Good At</span>
+      <h2 class="section-title">My Skills</h2>
+    </div>
+    
+    <div class="skills-grid-new">
+      @for (skill of getSortedSkills(); track skill.id) {
+        <div class="skill-card-new">
+          <div class="skill-meta-new">
+            <span class="skill-name-new">{{ skill.name }}</span>
+            <span class="skill-perc-new">{{ skill.proficiency }}%</span>
+          </div>
+          <mat-progress-bar mode="determinate" [value]="skill.proficiency" class="skill-progress-new"></mat-progress-bar>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE SECTION (EXPERIENCE & EDUCATION) -->
+<section id="experience" class="timeline-section">
+  <div class="section-container">
+    <!-- EXPERIENCE TIMELINE -->
+    <div class="section-header">
+      <span class="section-badge">My Professional Journey</span>
+      <h2 class="section-title">Work Experience</h2>
+    </div>
+    
+    <div class="timeline-container-new">
+      <div class="timeline-new">
+        @for (exp of experiences(); track exp.id) {
+          <div class="timeline-item-new">
+            <div class="timeline-dot-new"></div>
+            <div class="timeline-header-new">
+              <span class="timeline-date-badge">
+                {{ exp.startDate | date:'MMM yyyy' }} - {{ exp.isCurrent ? 'Present' : (exp.endDate | date:'MMM yyyy') }}
+              </span>
+              <span class="timeline-duration-badge">
+                {{ getExperienceDuration(exp.startDate, exp.endDate, exp.isCurrent) }}
+              </span>
+            </div>
+            
+            <div class="timeline-card-new">
+              <h3 class="timeline-role-new">{{ exp.role }}</h3>
+              <h4 class="timeline-company-new">{{ exp.company }}</h4>
+              <p class="timeline-desc-new">{{ exp.description }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+    
+    <!-- EDUCATION TIMELINE -->
+    <div class="section-header education-header-spacing">
+      <span class="section-badge">Academics</span>
+      <h2 class="section-title">Education</h2>
+    </div>
+    
+    <div class="timeline-container-new">
+      <div class="timeline-new">
+        @for (edu of educations(); track edu.id) {
+          <div class="timeline-item-new">
+            <div class="timeline-dot-new education-dot"></div>
+            <div class="timeline-header-new">
+              <span class="timeline-date-badge">
+                {{ edu.startDate | date:'yyyy' }} - {{ edu.isCurrent ? 'Present' : (edu.endDate | date:'yyyy') }}
+              </span>
+              <span class="timeline-duration-badge education-grade-badge" *ngIf="edu.grade">
+                {{ edu.grade }}
+              </span>
+            </div>
+            
+            <div class="timeline-card-new">
+              <h3 class="timeline-role-new">{{ edu.degree }} in {{ edu.fieldOfStudy }}</h3>
+              <h4 class="timeline-company-new">{{ edu.institution }}</h4>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PROJECTS SECTION -->
+<section id="projects" class="projects-section">
+  <div class="section-container">
+    <div class="section-header">
+      <span class="section-badge">Portfolio Showcase</span>
+      <h2 class="section-title">Featured Projects</h2>
+    </div>
+    
+    <div class="projects-grid">
+      @for (project of projects(); track project.id) {
+        <mat-card class="project-card hover-lift">
+          <div class="project-image-container">
+            <img [src]="project.imageUrl ? getFullUrl(project.imageUrl) : 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=400'" 
+                 alt="Project banner" class="project-img" />
+            <div class="project-overlay">
+              @if (project.githubUrl) {
+                <a mat-mini-fab color="accent" [href]="project.githubUrl" target="_blank" title="GitHub Source">
+                  <mat-icon>code</mat-icon>
+                </a>
+              }
+              @if (project.projectUrl) {
+                <a mat-mini-fab color="primary" [href]="project.projectUrl" target="_blank" title="Live Website">
+                  <mat-icon>open_in_new</mat-icon>
+                </a>
+              }
+            </div>
+          </div>
+          <mat-card-content class="project-details">
+            <h3 class="project-title">{{ project.title }}</h3>
+            <p class="project-desc">{{ project.description }}</p>
+            <div class="project-tech-chips">
+              @for (tech of getTechArray(project.technologies); track tech) {
+                <span class="tech-chip">{{ tech }}</span>
+              }
+            </div>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- GITHUB REPOSITORIES SECTION -->
+<section id="github-repos" class="github-repos-section" *ngIf="githubRepos().length > 0">
+  <div class="section-container">
+    <div class="section-header">
+      <span class="section-badge">Open Source Contributions</span>
+      <h2 class="section-title flex-center-gap">
+        <svg class="github-title-icon" viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        Live GitHub Repositories
+      </h2>
+      <p class="section-subtitle">Dynamically fetched from my GitHub profile</p>
+    </div>
+    
+    <div class="github-repos-grid">
+      @for (repo of githubRepos(); track repo.id) {
+        <a [href]="repo.html_url" target="_blank" class="github-repo-card-link">
+          <div class="github-repo-card">
+            <div class="github-repo-title-row">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" class="cyan-icon"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              <span class="github-repo-name">{{ repo.name }}</span>
+            </div>
+            
+            <p class="github-repo-desc">{{ repo.description || 'No description provided.' }}</p>
+            
+            <div class="github-repo-footer">
+              <div class="github-repo-lang-wrapper" *ngIf="repo.language">
+                <span class="github-repo-lang-dot"></span>
+                <span class="github-repo-lang-text">{{ repo.language }}</span>
+              </div>
+              <div class="github-repo-stats">
+                <span class="github-repo-stat-item">
+                  <mat-icon class="repo-stat-icon">star_border</mat-icon>
+                  {{ repo.stargazers_count }}
+                </span>
+                <span class="github-repo-stat-item">
+                  <mat-icon class="repo-stat-icon">call_split</mat-icon>
+                  {{ repo.forks_count }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </a>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY SECTION -->
+<section id="gallery" class="gallery-section" *ngIf="gallery().length > 0">
+  <div class="section-container">
+    <div class="section-header">
+      <span class="section-badge">Gallery</span>
+      <h2 class="section-title">Visual Showcase</h2>
+    </div>
+    <div class="gallery-grid">
+      @for (item of gallery(); track item.id) {
+        <div class="gallery-item hover-lift">
+          <img [src]="getFullUrl(item.imageUrl)" [alt]="item.title" class="gallery-img" />
+          <div class="gallery-caption">
+            <h4>{{ item.title }}</h4>
+            <span>{{ item.category }}</span>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- BLOGS PREVIEW -->
+<section id="blogs" class="blogs-section">
+  <div class="section-container">
+    <div class="section-header">
+      <span class="section-badge">Publications</span>
+      <h2 class="section-title">Latest Articles</h2>
+    </div>
+    <div class="blogs-grid">
+      @for (blog of blogs(); track blog.id) {
+        <mat-card class="blog-preview-card hover-lift">
+          <img [src]="blog.imageUrl ? getFullUrl(blog.imageUrl) : 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=400'" 
+               alt="Blog cover image" class="blog-preview-img" />
+          <mat-card-content class="blog-preview-details">
+            <span class="blog-preview-date">{{ blog.publishedAt || blog.createdAt | date:'MMMM d, yyyy' }}</span>
+            <h3 class="blog-preview-title">{{ blog.title }}</h3>
+            <p class="blog-preview-desc">{{ blog.summary }}</p>
+            <a mat-button color="primary" class="read-more-btn" (click)="viewBlog(blog.slug)">
+              Read Full Article <mat-icon>arrow_forward</mat-icon>
+            </a>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact" class="contact-section">
+  <div class="section-container">
+    <div class="section-header">
+      <span class="section-badge">Connect</span>
+      <h2 class="section-title">Get in Touch</h2>
+    </div>
+    
+    <div class="contact-grid">
+      <div class="contact-card-info">
+        <h3>Let's collaborate on your next project</h3>
+        <p>Fill out the contact form, and I will get back to you as soon as possible. Alternatively, feel free to send a message via email.</p>
+        
+        <div class="contact-meta-list">
+          <div class="contact-meta-item">
+            <mat-icon>mail</mat-icon>
+            <div>
+              <h4>Email</h4>
+              <p>{{ about()?.email || 'N/A' }}</p>
+            </div>
+          </div>
+          <div class="contact-meta-item">
+            <mat-icon>location_on</mat-icon>
+            <div>
+              <h4>Address</h4>
+              <p>{{ about()?.location || 'Remote' }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <mat-card class="contact-form-card">
+        <mat-card-content>
+          <form [formGroup]="contactForm" (ngSubmit)="onContactSubmit()">
+            <mat-form-field appearance="outline">
+              <mat-label>Your Name</mat-label>
+              <input matInput formControlName="name" placeholder="John Smith" />
+              @if (contactForm.get('name')?.hasError('required')) {
+                <mat-error>Name is required</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Your Email</mat-label>
+              <input matInput type="email" formControlName="email" placeholder="john@example.com" />
+              @if (contactForm.get('email')?.hasError('required')) {
+                <mat-error>Email is required</mat-error>
+              }
+              @if (contactForm.get('email')?.hasError('email')) {
+                <mat-error>Invalid email format</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Subject</mat-label>
+              <input matInput formControlName="subject" placeholder="Project collaboration proposal" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Message</mat-label>
+              <textarea matInput formControlName="message" rows="5" placeholder="Enter your message..."></textarea>
+              @if (contactForm.get('message')?.hasError('required')) {
+                <mat-error>Message is required</mat-error>
+              }
+            </mat-form-field>
+
+            <button mat-flat-button color="primary" type="submit" [disabled]="contactForm.invalid || isSubmitting()">
+              {{ isSubmitting() ? 'Sending...' : 'Send Message' }}
+            </button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD RESUME MODAL DIALOG -->
+<div class="download-modal-overlay" *ngIf="isDownloadModalVisible()" (click)="closeDownloadModal()">
+  <div class="download-modal-card" (click)="$event.stopPropagation()">
+    <!-- Header with blue-to-purple gradient -->
+    <div class="download-modal-header">
+      <div class="download-pdf-icon-wrapper">
+        <svg viewBox="0 0 24 24" width="36" height="36" fill="currentColor" class="pdf-icon-svg"><path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/></svg>
+      </div>
+      <h3 class="download-modal-title">Download Resume</h3>
+      <p class="download-modal-subtitle">Please provide your details below</p>
+      
+      <!-- Close button on top-right -->
+      <button class="modal-close-btn" (click)="closeDownloadModal()">&times;</button>
+    </div>
+    
+    <!-- Body form content -->
+    <div class="download-modal-body">
+      <form [formGroup]="downloadForm" (ngSubmit)="onSubmitDownload()" class="download-resume-form">
+        <!-- Name Input -->
+        <div class="modal-form-group">
+          <label class="modal-form-label">Your Name *</label>
+          <div class="modal-input-wrapper">
+            <mat-icon class="input-inline-icon">person</mat-icon>
+            <input type="text" formControlName="name" class="modal-input-field" placeholder="Enter your full name" />
+          </div>
+          <span class="modal-error-text" *ngIf="downloadForm.get('name')?.touched && downloadForm.get('name')?.hasError('required')">
+            Name is required
+          </span>
+        </div>
+        
+        <!-- Email Input -->
+        <div class="modal-form-group">
+          <label class="modal-form-label">Your Email *</label>
+          <div class="modal-input-wrapper">
+            <mat-icon class="input-inline-icon">email</mat-icon>
+            <input type="email" formControlName="email" class="modal-input-field" placeholder="Enter your email" />
+          </div>
+          <span class="modal-error-text" *ngIf="downloadForm.get('email')?.touched && downloadForm.get('email')?.invalid">
+            Please enter a valid email address
+          </span>
+        </div>
+        
+        <!-- Company Input -->
+        <div class="modal-form-group">
+          <label class="modal-form-label">Company Name (Optional)</label>
+          <div class="modal-input-wrapper">
+            <mat-icon class="input-inline-icon">business</mat-icon>
+            <input type="text" formControlName="company" class="modal-input-field" placeholder="Where do you work?" />
+          </div>
+        </div>
+        
+        <!-- Designation Input -->
+        <div class="modal-form-group">
+          <label class="modal-form-label">Designation (Optional)</label>
+          <div class="modal-input-wrapper">
+            <mat-icon class="input-inline-icon">work</mat-icon>
+            <input type="text" formControlName="designation" class="modal-input-field" placeholder="Your job title" />
+          </div>
+        </div>
+        
+        <!-- Action submit button -->
+        <button type="submit" class="modal-submit-btn" [disabled]="downloadForm.invalid">
+          Download Resume <mat-icon class="btn-download-icon">download</mat-icon>
+        </button>
+      </form>
+      
+      <!-- Secure badge footer -->
+      <div class="modal-secure-footer">
+        <mat-icon class="secure-icon">shield</mat-icon>
+        <span class="secure-text">Your information is secure and encrypted</span>
+      </div>
+    </div>
+  </div>
+</div>

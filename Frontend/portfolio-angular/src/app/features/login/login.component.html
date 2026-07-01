@@ -1,0 +1,72 @@
+<div class="login-container">
+  <div class="login-card">
+    <!-- Header with user shield icon -->
+    <div class="login-header">
+      <div class="user-shield-wrapper">
+        <mat-icon class="admin-shield-icon">admin_panel_settings</mat-icon>
+      </div>
+      <h3 class="login-title">Admin Login</h3>
+      <p class="login-subtitle">Enter your credentials to access dashboard</p>
+    </div>
+
+    <!-- Body content -->
+    <div class="login-body">
+      @if (isLoading()) {
+        <mat-progress-bar mode="indeterminate" class="mb-4 login-progress"></mat-progress-bar>
+      }
+      
+      @if (errorMessage()) {
+        <div class="error-banner">
+          <mat-icon>error_outline</mat-icon>
+          <span>{{ errorMessage() }}</span>
+        </div>
+      }
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <!-- Username Input -->
+        <div class="login-form-group">
+          <div class="login-input-wrapper">
+            <mat-icon class="input-inline-icon">person</mat-icon>
+            <input type="text" formControlName="email" class="login-input-field" placeholder="Username" />
+          </div>
+          @if (loginForm.get('email')?.touched && loginForm.get('email')?.invalid) {
+            <span class="login-error-text">
+              @if (loginForm.get('email')?.hasError('required')) {
+                Username email is required
+              } @else {
+                Please enter a valid email address
+              }
+            </span>
+          }
+        </div>
+        
+        <!-- Password Input -->
+        <div class="login-form-group">
+          <div class="login-input-wrapper">
+            <mat-icon class="input-inline-icon">lock</mat-icon>
+            <input [type]="hidePassword() ? 'password' : 'text'" formControlName="password" class="login-input-field" placeholder="Password" />
+            <button class="password-toggle-btn" (click)="hidePassword.set(!hidePassword())" type="button">
+              <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+          </div>
+          @if (loginForm.get('password')?.touched && loginForm.get('password')?.hasError('required')) {
+            <span class="login-error-text">Password is required</span>
+          }
+        </div>
+        
+        <!-- Submit Button -->
+        <button type="submit" class="login-submit-btn" [disabled]="loginForm.invalid || isLoading()">
+          {{ isLoading() ? 'Logging in...' : 'Login' }}
+        </button>
+      </form>
+      
+      <!-- Back to Home link -->
+      <div class="back-home-wrapper">
+        <a routerLink="/" class="back-home-link">
+          <mat-icon class="back-arrow-icon">arrow_back</mat-icon>
+          Back to Home
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

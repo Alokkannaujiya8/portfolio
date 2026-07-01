@@ -1,0 +1,176 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="'navigation'"
+      [mode]="'over'">
+    <mat-toolbar color="primary">Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item (click)="scrollTo('hero'); drawer.close()">Home</a>
+      <a mat-list-item (click)="scrollTo('about'); drawer.close()">About</a>
+      <a mat-list-item (click)="scrollTo('skills'); drawer.close()">Skills</a>
+      <a mat-list-item (click)="scrollTo('projects'); drawer.close()">Projects</a>
+      <a mat-list-item (click)="scrollTo('experience'); drawer.close()">Experience</a>
+      <a mat-list-item (click)="scrollTo('blogs'); drawer.close()">Blog</a>
+      <a mat-list-item (click)="scrollTo('gallery'); drawer.close()">Gallery</a>
+      <a mat-list-item (click)="scrollTo('contact'); drawer.close()">Contact</a>
+      <a mat-list-item routerLink="/login" (click)="drawer.close()">Admin Login</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  
+  <mat-sidenav-content>
+    <mat-toolbar class="navbar navbar-blur">
+      <button mat-icon-button (click)="drawer.toggle()" class="menu-btn">
+        <mat-icon>menu</mat-icon>
+      </button>
+      
+      <span class="nav-logo" (click)="scrollTo('hero')">
+        <span class="logo-code-symbol">&lt;/&gt;</span>
+        <span class="logo-name">{{ getLogoName() }}</span>
+      </span>
+      
+      <div class="nav-links">
+        <button mat-button (click)="scrollTo('hero')">Home</button>
+        <button mat-button (click)="scrollTo('about')">About</button>
+        <button mat-button (click)="scrollTo('skills')">Skills</button>
+        <button mat-button (click)="scrollTo('projects')">Projects</button>
+        <button mat-button (click)="scrollTo('experience')">Experience</button>
+        <button mat-button (click)="scrollTo('blogs')">Blog</button>
+        <button mat-button (click)="scrollTo('gallery')">Gallery</button>
+        <button mat-button (click)="scrollTo('contact')">Contact</button>
+      </div>
+      
+      <span class="spacer"></span>
+      
+      <div class="nav-actions">
+        <button mat-icon-button (click)="themeService.toggleTheme()">
+          <mat-icon>{{ themeService.isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+        </button>
+
+        @if (authService.isAuthenticated()) {
+          <button mat-button [matMenuTriggerFor]="adminMenu" class="admin-dropdown-btn">
+            <mat-icon class="admin-user-icon">manage_accounts</mat-icon>
+            Admin
+            <mat-icon class="arrow-icon">keyboard_arrow_down</mat-icon>
+          </button>
+          <mat-menu #adminMenu="matMenu" class="custom-admin-menu">
+            <a mat-menu-item routerLink="/admin">
+              <mat-icon>dashboard</mat-icon>
+              <span>Dashboard</span>
+            </a>
+            <a mat-menu-item routerLink="/admin/profile">
+              <mat-icon>person</mat-icon>
+              <span>Profile</span>
+            </a>
+            <a mat-menu-item routerLink="/admin/skills">
+              <mat-icon>format_list_bulleted</mat-icon>
+              <span>Skills</span>
+            </a>
+            <a mat-menu-item routerLink="/admin/projects">
+              <mat-icon>account_tree</mat-icon>
+              <span>Projects</span>
+            </a>
+            <a mat-menu-item routerLink="/admin/messages">
+              <mat-icon>email</mat-icon>
+              <span>Messages</span>
+            </a>
+            <a mat-menu-item routerLink="/admin/ai-video">
+              <mat-icon style="color: #eab308;">videocam</mat-icon>
+              <span style="font-weight: 600;">AI Custom Video</span>
+            </a>
+            <a mat-menu-item routerLink="/admin/settings">
+              <mat-icon>settings</mat-icon>
+              <span>Settings</span>
+            </a>
+            <hr class="menu-divider" style="border: 0; border-top: 1px solid rgba(0,0,0,0.06); margin: 4px 0;" />
+            <button mat-menu-item (click)="authService.logout()">
+              <mat-icon>logout</mat-icon>
+              <span>Logout</span>
+            </button>
+          </mat-menu>
+        } @else {
+          <a mat-stroked-button routerLink="/login" class="admin-btn">Admin Portal</a>
+        }
+      </div>
+    </mat-toolbar>
+    
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-grid">
+        <!-- Brand/Bio Column -->
+        <div class="footer-col brand-col">
+          <div class="brand-logo">
+            <span class="logo-code-symbol">&lt;/&gt;</span>
+            <span class="logo-name">{{ getLogoName() }}</span>
+          </div>
+          <p class="brand-desc">
+            I am an ASP.NET Developer with hands-on industry experience building scalable web applications using ASP.NET Core, RESTful APIs, and Angular.
+          </p>
+          <div class="footer-socials">
+            <a href="https://github.com/Alokkannaujiya8" target="_blank" class="social-icon" title="GitHub">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            </a>
+            <a href="https://linkedin.com/in/alok8" target="_blank" class="social-icon" title="LinkedIn">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <a href="https://twitter.com" target="_blank" class="social-icon" title="Twitter">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="social-icon" title="Instagram">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links Column -->
+        <div class="footer-col links-col">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a (click)="scrollTo('hero')">Home</a></li>
+            <li><a (click)="scrollTo('about')">About</a></li>
+            <li><a (click)="scrollTo('skills')">Skills</a></li>
+            <li><a (click)="scrollTo('projects')">Projects</a></li>
+            <li><a (click)="scrollTo('blogs')">Blog</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info Column -->
+        <div class="footer-col contact-col">
+          <h3>Contact Info</h3>
+          <div class="contact-info-item">
+            <mat-icon>location_on</mat-icon>
+            <div>
+              <p class="contact-text-main">State: Delhi Pin Code: 110008 (Main center)</p>
+              <p class="contact-text-sub">Location: {{ about()?.location || 'West Patel Nagar, New Delhi' }}</p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <mat-icon>phone</mat-icon>
+            <p>{{ about()?.phone || '8299078491' }}</p>
+          </div>
+          <div class="contact-info-item">
+            <mat-icon>mail</mat-icon>
+            <p>{{ about()?.email || 'alokkanojiya96@gmail.com' }}</p>
+          </div>
+        </div>
+
+        <!-- Newsletter Column -->
+        <div class="footer-col newsletter-col">
+          <h3>Newsletter</h3>
+          <p class="newsletter-sub">Subscribe for latest updates</p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Your Email" required />
+            <button type="submit" class="newsletter-btn" aria-label="Subscribe">
+              <mat-icon>send</mat-icon>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; {{ currentYear }} ALOK. All rights reserved.</p>
+      </div>
+    </footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

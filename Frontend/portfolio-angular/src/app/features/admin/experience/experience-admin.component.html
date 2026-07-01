@@ -1,0 +1,120 @@
+<div class="crud-container">
+  <div class="header-row">
+    <h1 class="page-title">Manage Experience</h1>
+    <button mat-flat-button color="accent" (click)="onNewExperience()">
+      <mat-icon>add</mat-icon> New Experience
+    </button>
+  </div>
+
+  <div class="crud-grid">
+    <!-- FORM -->
+    <mat-card class="form-card" *ngIf="isFormVisible()">
+      <mat-card-header>
+        <mat-card-title>{{ editId() ? 'Edit Experience' : 'New Experience' }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="experienceForm" (ngSubmit)="onSubmit()" class="crud-form">
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Company</mat-label>
+              <input matInput formControlName="company" placeholder="e.g. Microsoft" />
+              @if (experienceForm.get('company')?.hasError('required')) {
+                <mat-error>Company is required</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Role / Job Title</mat-label>
+              <input matInput formControlName="role" placeholder="e.g. Senior Software Engineer" />
+              @if (experienceForm.get('role')?.hasError('required')) {
+                <mat-error>Role is required</mat-error>
+              }
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Location</mat-label>
+              <input matInput formControlName="location" placeholder="e.g. Redmond, WA" />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Display Order</mat-label>
+              <input matInput type="number" formControlName="displayOrder" />
+            </mat-form-field>
+          </div>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline">
+              <mat-label>Start Date</mat-label>
+              <input matInput type="date" formControlName="startDate" />
+              @if (experienceForm.get('startDate')?.hasError('required')) {
+                <mat-error>Start date is required</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field appearance="outline" *ngIf="!experienceForm.value.isCurrent">
+              <mat-label>End Date</mat-label>
+              <input matInput type="date" formControlName="endDate" />
+            </mat-form-field>
+          </div>
+
+          <div class="checkbox-row">
+            <mat-checkbox formControlName="isCurrent">Currently working here</mat-checkbox>
+          </div>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Description / Responsibilities</mat-label>
+            <textarea matInput formControlName="description" rows="4" placeholder="Responsibilities, tech stack used, accomplishments..."></textarea>
+            @if (experienceForm.get('description')?.hasError('required')) {
+              <mat-error>Description is required</mat-error>
+            }
+          </mat-form-field>
+
+          <div class="actions-row">
+            <button mat-button type="button" (click)="onCancel()">Cancel</button>
+            <button mat-flat-button color="primary" type="submit" [disabled]="experienceForm.invalid">
+              {{ editId() ? 'Update Experience' : 'Save Experience' }}
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- TABLE -->
+    <mat-card class="table-card">
+      <mat-card-content>
+        <table mat-table [dataSource]="experiences()" class="w-full">
+          <ng-container matColumnDef="company">
+            <th mat-header-cell *matHeaderCellDef> Company </th>
+            <td mat-cell *matCellDef="let element"> {{element.company}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="role">
+            <th mat-header-cell *matHeaderCellDef> Role </th>
+            <td mat-cell *matCellDef="let element"> <strong>{{element.role}}</strong> </td>
+          </ng-container>
+
+          <ng-container matColumnDef="dates">
+            <th mat-header-cell *matHeaderCellDef> Dates </th>
+            <td mat-cell *matCellDef="let element"> 
+              {{element.startDate | date:'MMM yyyy'}} - {{element.isCurrent ? 'Present' : (element.endDate | date:'MMM yyyy')}} 
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button color="primary" (click)="onEdit(element)" title="Edit">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="onDelete(element.id)" title="Delete">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

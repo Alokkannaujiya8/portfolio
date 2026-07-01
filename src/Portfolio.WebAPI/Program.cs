@@ -15,8 +15,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Portfolio.Application;
-using Portfolio.Persistence;
-using Portfolio.Persistence.Seed;
+using Portfolio.Infrastructure.Persistence.Context;
+using Portfolio.Infrastructure.Persistence.Seed;
 using Portfolio.Infrastructure;
 using Portfolio.WebAPI.Middleware;
 

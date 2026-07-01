@@ -4,9 +4,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Portfolio.Application.Common.Interfaces;
+using Portfolio.Application.Interfaces.Repositories;
+using Portfolio.Infrastructure.Persistence.Context;
 
-namespace Portfolio.Persistence.Repositories;
+namespace Portfolio.Infrastructure.Persistence.Repositories;
 
 public class Repository<T> : IRepository<T> where T : class
 {

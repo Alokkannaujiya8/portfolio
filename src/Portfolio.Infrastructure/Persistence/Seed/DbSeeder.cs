@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Portfolio.Domain.Entities;
 
-namespace Portfolio.Persistence.Seed;
+using Portfolio.Infrastructure.Persistence.Context;
+
+namespace Portfolio.Infrastructure.Persistence.Seed;
 
 public static class DbSeeder
 {

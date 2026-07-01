@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 
-namespace Portfolio.Application.Common.Interfaces;
+namespace Portfolio.Application.Interfaces.Identity;
 
 public interface ITokenService
 {

@@ -1,11 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Portfolio.Application.Common.Interfaces;
-using Portfolio.Infrastructure.Files;
-using Portfolio.Infrastructure.Security;
-using Portfolio.Persistence;
-using Portfolio.Persistence.Repositories;
+using Portfolio.Application.Interfaces.Repositories;
+using Portfolio.Application.Interfaces.Identity;
+using Portfolio.Application.Interfaces.Storage;
+using Portfolio.Infrastructure.Authentication;
+using Portfolio.Infrastructure.FileStorage;
+using Portfolio.Infrastructure.Persistence.Context;
+using Portfolio.Infrastructure.Persistence.Repositories;
+using Portfolio.Infrastructure.Persistence.UnitOfWork;
 
 namespace Portfolio.Infrastructure;
 

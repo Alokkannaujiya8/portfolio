@@ -6,9 +6,9 @@ using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using Portfolio.Application.Common.Interfaces;
+using Portfolio.Application.Interfaces.Identity;
 
-namespace Portfolio.Infrastructure.Security;
+namespace Portfolio.Infrastructure.Authentication;
 
 public class TokenService : ITokenService
 {

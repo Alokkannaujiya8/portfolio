@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FluentValidation;
 using MediatR;
-using Portfolio.Application.Common.Interfaces;
 using Portfolio.Domain.Entities;
 
 namespace Portfolio.Application.Features.Skills;

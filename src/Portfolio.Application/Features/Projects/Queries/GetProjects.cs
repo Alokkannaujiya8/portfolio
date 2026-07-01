@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using Portfolio.Application.Common.Interfaces;
 using Portfolio.Domain.Entities;
 
 namespace Portfolio.Application.Features.Projects.Queries;

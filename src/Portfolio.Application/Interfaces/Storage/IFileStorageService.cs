@@ -1,7 +1,7 @@
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Portfolio.Application.Common.Interfaces;
+namespace Portfolio.Application.Interfaces.Storage;
 
 public interface IFileStorageService
 {

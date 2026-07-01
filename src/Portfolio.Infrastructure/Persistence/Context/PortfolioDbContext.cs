@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Portfolio.Domain.Entities;
 
-namespace Portfolio.Persistence;
+namespace Portfolio.Infrastructure.Persistence.Context;
 
 public class PortfolioDbContext : IdentityDbContext<IdentityUser>
 {

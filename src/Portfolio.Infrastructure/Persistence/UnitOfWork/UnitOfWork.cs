@@ -2,9 +2,11 @@ using System;
 using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
-using Portfolio.Application.Common.Interfaces;
+using Portfolio.Application.Interfaces.Repositories;
+using Portfolio.Infrastructure.Persistence.Context;
+using Portfolio.Infrastructure.Persistence.Repositories;
 
-namespace Portfolio.Persistence.Repositories;
+namespace Portfolio.Infrastructure.Persistence.UnitOfWork;
 
 public class UnitOfWork : IUnitOfWork
 {

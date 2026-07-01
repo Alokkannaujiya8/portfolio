@@ -2,9 +2,9 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Portfolio.Application.Common.Interfaces;
+using Portfolio.Application.Interfaces.Storage;
 
-namespace Portfolio.Infrastructure.Files;
+namespace Portfolio.Infrastructure.FileStorage;
 
 public class FileStorageService : IFileStorageService
 {

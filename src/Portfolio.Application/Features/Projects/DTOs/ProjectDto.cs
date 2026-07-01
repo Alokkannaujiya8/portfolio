@@ -1,6 +1,6 @@
 using System;
 
-namespace Portfolio.Application.Features.Projects;
+namespace Portfolio.Application.Features.Projects.DTOs;
 
 public class ProjectDto
 {

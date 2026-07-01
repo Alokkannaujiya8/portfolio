@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Portfolio.Application.Common.Interfaces;
+namespace Portfolio.Application.Interfaces.Repositories;
 
 public interface IUnitOfWork : IDisposable
 {

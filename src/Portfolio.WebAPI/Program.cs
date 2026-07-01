@@ -36,8 +36,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 // Clean Architecture Layers
 builder.Services.AddApplicationServices();
-builder.Services.AddPersistenceServices(builder.Configuration);
-builder.Services.AddInfrastructureServices();
+builder.Services.AddInfrastructureServices(builder.Configuration);
 
 // Identity Configuration
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>

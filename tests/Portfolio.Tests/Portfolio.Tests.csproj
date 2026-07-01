@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
@@ -22,7 +22,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Portfolio.Domain\Portfolio.Domain.csproj" />
     <ProjectReference Include="..\..\src\Portfolio.Application\Portfolio.Application.csproj" />
-    <ProjectReference Include="..\..\src\Portfolio.Persistence\Portfolio.Persistence.csproj" />
     <ProjectReference Include="..\..\src\Portfolio.Infrastructure\Portfolio.Infrastructure.csproj" />
     <ProjectReference Include="..\..\src\Portfolio.WebAPI\Portfolio.WebAPI.csproj" />
   </ItemGroup>

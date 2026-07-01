@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Portfolio.Application\Portfolio.Application.csproj" />
-    <ProjectReference Include="..\Portfolio.Persistence\Portfolio.Persistence.csproj" />
     <ProjectReference Include="..\Portfolio.Infrastructure\Portfolio.Infrastructure.csproj" />
   </ItemGroup>
 

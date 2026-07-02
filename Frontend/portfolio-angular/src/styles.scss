@@ -72,14 +72,26 @@ body:not(.dark-theme) {
     color: #4f46e5;
   }
   .nav-links button {
-    color: #475569;
+    color: #475569 !important;
   }
   .nav-links button:hover {
-    color: #000000;
+    color: #000000 !important;
   }
   .admin-btn {
     border-color: rgba(0, 0, 0, 0.15) !important;
     color: #000000 !important;
+  }
+  
+  .badge {
+    background: rgba(79, 70, 229, 0.08) !important;
+    border: 1px solid rgba(79, 70, 229, 0.15) !important;
+    color: #4f46e5 !important;
+  }
+  .badge-icon {
+    color: #4f46e5 !important;
+  }
+  .hero-description {
+    color: #475569 !important;
   }
   
   .hero-section {

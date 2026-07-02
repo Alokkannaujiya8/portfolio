@@ -21,7 +21,7 @@ public static class DbSeeder
         }
 
         // 2. Seed Admin User
-        var adminEmail = "admin@portfolio.com";
+        var adminEmail = "alokkanojiya96@gmail.com";
         var adminUser = await userManager.FindByEmailAsync(adminEmail);
         if (adminUser == null)
         {
@@ -31,7 +31,7 @@ public static class DbSeeder
                 Email = adminEmail,
                 EmailConfirmed = true
             };
-            var result = await userManager.CreateAsync(adminUser, "AdminPassword123!");
+            var result = await userManager.CreateAsync(adminUser, "Alok@123");
             if (result.Succeeded)
             {
                 await userManager.AddToRoleAsync(adminUser, adminRoleName);
@@ -46,7 +46,7 @@ public static class DbSeeder
                 Title = "Hi, I'm Alok",
                 Subtitle = "ASP.NET Developer",
                 ImageUrl = "uploads/profile.jpg",
-                ResumeUrl = "https://drive.google.com/file/d/1lBua6KF4OEO5Hb2PYLT16bPSXdedY_0c/view?usp=drive_link",
+                ResumeUrl = "https://drive.google.com/uc?export=download&id=1lBua6KF4OEO5Hb2PYLT16bPSXdedY_0c",
                 PrimaryButtonText = "View Projects",
                 SecondaryButtonText = "Contact Me"
             });

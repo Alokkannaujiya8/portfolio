@@ -1,0 +1,41 @@
+name: Frontend CI
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'Frontend/portfolio-angular/**'
+      - '.github/workflows/frontend-ci.yml'
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - 'Frontend/portfolio-angular/**'
+      - '.github/workflows/frontend-ci.yml'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: Frontend/portfolio-angular
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        cache-dependency-path: Frontend/portfolio-angular/package-lock.json
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build Angular App
+      run: npm run build -- --configuration production
+
+    - name: Run Tests
+      run: npm run test -- --watch=false --browsers=ChromeHeadless

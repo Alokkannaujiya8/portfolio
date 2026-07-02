@@ -13,6 +13,18 @@ public static class DbSeeder
 {
     public static async Task SeedAsync(PortfolioDbContext context, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
     {
+        // Force-refresh the database content by clearing old data if present
+        if (context.Skills.Any(s => s.Name == "Git & Version Control") || !context.Skills.Any())
+        {
+            context.Heroes.RemoveRange(context.Heroes);
+            context.Abouts.RemoveRange(context.Abouts);
+            context.Projects.RemoveRange(context.Projects);
+            context.Skills.RemoveRange(context.Skills);
+            context.Experiences.RemoveRange(context.Experiences);
+            context.Educations.RemoveRange(context.Educations);
+            await context.SaveChangesAsync();
+        }
+
         // 1. Seed Roles
         var adminRoleName = "Admin";
         if (!await roleManager.RoleExistsAsync(adminRoleName))

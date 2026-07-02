@@ -49,11 +49,11 @@ export class PublicLayoutComponent implements OnInit {
   }
 
   getLogoName(): string {
-    const title = this.hero()?.title || "Hi, I'm AJAY KUMAR";
+    const title = this.hero()?.title || "Hi, I'm Alok";
     const match = title.match(/^(.*i'm\s+)(.*)$/i) || title.match(/^(.*i\s+am\s+)(.*)$/i);
     if (match) {
       return match[2];
     }
-    return 'AJAY KUMAR';
+    return 'ALOK';
   }
 }

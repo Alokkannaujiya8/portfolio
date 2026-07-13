@@ -46,6 +46,7 @@
         </button>
 
         @if (authService.isAuthenticated()) {
+          <app-notification-bell></app-notification-bell>
           <button mat-button [matMenuTriggerFor]="adminMenu" class="admin-dropdown-btn">
             <mat-icon class="admin-user-icon">manage_accounts</mat-icon>
             Admin

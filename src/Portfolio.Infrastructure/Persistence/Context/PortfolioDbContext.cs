@@ -25,10 +25,24 @@ public class PortfolioDbContext : IdentityDbContext<IdentityUser>
     public DbSet<ContactMessage> ContactMessages => Set<ContactMessage>();
     public DbSet<Setting> Settings => Set<Setting>();
     public DbSet<Domain.Entities.SEO> SEOs => Set<Domain.Entities.SEO>();
+    public DbSet<Notification> Notifications => Set<Notification>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<Notification>(entity =>
+        {
+            entity.HasKey(n => n.Id);
+            entity.Property(n => n.Title).IsRequired().HasMaxLength(200);
+            entity.Property(n => n.Message).IsRequired().HasMaxLength(1000);
+            entity.Property(n => n.Type).IsRequired().HasMaxLength(50);
+            entity.Property(n => n.UserId).HasMaxLength(450);
+            entity.Property(n => n.RedirectUrl).HasMaxLength(500);
+            entity.Property(n => n.Icon).HasMaxLength(100);
+            entity.Property(n => n.CreatedBy).HasMaxLength(256);
+            entity.Property(n => n.LastModifiedBy).HasMaxLength(256);
+        });
 
         modelBuilder.Entity<Project>(entity =>
         {

@@ -19,6 +19,10 @@ public static class DependencyInjection
         // Infrastructure Services
         services.AddTransient<ITokenService, TokenService>();
         services.AddTransient<IFileStorageService, FileStorageService>();
+        services.AddTransient<Application.Interfaces.Services.IEmailService, Email.EmailService>();
+        services.AddTransient<Application.Interfaces.Services.INotificationSender, SignalR.NotificationSender>();
+        services.AddScoped<IIdentityService, Identity.IdentityService>();
+        services.AddScoped<Application.Interfaces.Services.INotificationService, Application.Services.NotificationService>();
 
         // Persistence Services
         services.AddDbContext<PortfolioDbContext>(options =>
@@ -28,6 +32,7 @@ public static class DependencyInjection
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+        services.AddScoped<INotificationRepository, NotificationRepository>();
 
         return services;
     }

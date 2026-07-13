@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './features/home/home.module';
 import { AuthenticationModule } from './features/login/login.module';
 import { DashboardModule } from './features/admin/dashboard.module';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,12 @@ import { DashboardModule } from './features/admin/dashboard.module';
     SharedModule,
     HomeModule,
     AuthenticationModule,
-    DashboardModule
+    DashboardModule,
+    ToastrModule.forRoot({
+      timeOut: 4000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true
+    })
   ],
   bootstrap: [AppComponent]
 })

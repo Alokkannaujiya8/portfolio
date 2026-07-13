@@ -1,0 +1,271 @@
+.notifications-container {
+  padding: 24px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  
+  .page-title {
+    font-size: 28px;
+    font-weight: 800;
+    margin: 0 0 6px 0;
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .page-subtitle {
+    margin: 0;
+    color: #94a3b8;
+    font-size: 14px;
+  }
+  
+  .action-btn-main {
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 8px 16px;
+    height: auto;
+    line-height: normal;
+    
+    mat-icon {
+      margin-right: 6px;
+    }
+  }
+}
+
+.filter-card {
+  background: rgba(30, 41, 59, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  margin-bottom: 24px;
+  box-shadow: none !important;
+  
+  .filter-row {
+    display: flex;
+    gap: 16px;
+    padding: 16px !important;
+    flex-wrap: wrap;
+  }
+  
+  .filter-item {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: -16px;
+  }
+}
+
+.table-card {
+  background: rgba(30, 41, 59, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: none !important;
+  
+  .table-container {
+    padding: 0 !important;
+    position: relative;
+  }
+  
+  .loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+  }
+}
+
+.notifications-table {
+  width: 100%;
+  background: transparent !important;
+  
+  th {
+    color: #94a3b8;
+    font-weight: 600;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 16px;
+  }
+  
+  td {
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    font-size: 13.5px;
+  }
+  
+  .type-icon {
+    font-size: 20px;
+    height: 20px;
+    width: 20px;
+  }
+  
+  .title-cell {
+    font-weight: 600;
+    color: #f1f5f9;
+  }
+  
+  .message-cell {
+    color: #94a3b8;
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .date-cell {
+    color: #64748b;
+  }
+  
+  .status-pill {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    
+    &.unread {
+      background: rgba(99, 102, 241, 0.1);
+      color: #818cf8;
+    }
+    
+    &.read {
+      background: rgba(71, 85, 105, 0.2);
+      color: #94a3b8;
+    }
+  }
+  
+  .row-actions {
+    display: flex;
+    gap: 4px;
+  }
+  
+  .clickable-row {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+    
+    &.unread-row {
+      background-color: rgba(99, 102, 241, 0.02);
+    }
+  }
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 16px;
+  text-align: center;
+  
+  .empty-state-icon {
+    font-size: 48px;
+    height: 48px;
+    width: 48px;
+    color: #475569;
+    margin-bottom: 12px;
+  }
+  
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #f1f5f9;
+    margin: 0 0 6px 0;
+  }
+  
+  p {
+    color: #64748b;
+    font-size: 14px;
+    margin: 0;
+  }
+}
+
+.empty-table-cell {
+  text-align: center;
+}
+
+mat-paginator {
+  background: transparent !important;
+  color: #94a3b8 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+// Light theme support overrides
+::ng-deep body:not(.dark-theme) {
+  .page-header {
+    .page-subtitle {
+      color: #64748b;
+    }
+  }
+  
+  .filter-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .table-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .notifications-table {
+    th {
+      color: #475569;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    td {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    }
+    .title-cell {
+      color: #0f172a;
+    }
+    .message-cell {
+      color: #475569;
+    }
+    .date-cell {
+      color: #64748b;
+    }
+    
+    .status-pill {
+      &.unread {
+        background: rgba(79, 70, 229, 0.08);
+        color: #4f46e5;
+      }
+      &.read {
+        background: rgba(0, 0, 0, 0.04);
+        color: #64748b;
+      }
+    }
+    
+    .clickable-row {
+      &:hover {
+        background-color: #f8fafc;
+      }
+      &.unread-row {
+        background-color: rgba(79, 70, 229, 0.01);
+      }
+    }
+  }
+  
+  .empty-state {
+    .empty-state-icon {
+      color: #94a3b8;
+    }
+    h3 {
+      color: #0f172a;
+    }
+    p {
+      color: #64748b;
+    }
+  }
+  
+  mat-paginator {
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    color: #475569 !important;
+  }
+}

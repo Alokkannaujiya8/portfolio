@@ -34,5 +34,8 @@ public class AutoMapperProfile : Profile
         CreateMap<ContactMessage, ContactMessageDto>().ReverseMap();
         CreateMap<Setting, SettingDto>().ReverseMap();
         CreateMap<Domain.Entities.SEO, SEODto>().ReverseMap();
+        CreateMap<Notification, DTOs.Notification.NotificationDto>().ReverseMap();
+        CreateMap<DTOs.Notification.CreateNotificationDto, Notification>();
+        CreateMap<DTOs.Notification.UpdateNotificationDto, Notification>();
     }
 }

@@ -18,6 +18,7 @@ using Portfolio.Application;
 using Portfolio.Infrastructure.Persistence.Context;
 using Portfolio.Infrastructure.Persistence.Seed;
 using Portfolio.Infrastructure;
+using Portfolio.Infrastructure.SignalR;
 using Portfolio.WebAPI.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,6 +34,7 @@ builder.Host.UseSerilog();
 // Add services
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSignalR();
 
 // Clean Architecture Layers
 builder.Services.AddApplicationServices();
@@ -73,6 +75,19 @@ builder.Services.AddAuthentication(options =>
             ValidAudience = builder.Configuration["Jwt:Audience"] ?? "PortfolioClients",
             ValidateLifetime = true,
             ClockSkew = TimeSpan.Zero
+        };
+        options.Events = new JwtBearerEvents
+        {
+            OnMessageReceived = context =>
+            {
+                var accessToken = context.Request.Query["access_token"];
+                var path = context.HttpContext.Request.Path;
+                if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/hubs"))
+                {
+                    context.Token = accessToken;
+                }
+                return Task.CompletedTask;
+            }
         };
     });
 
@@ -183,6 +198,7 @@ app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapHub<NotificationHub>("/hubs/notifications");
 app.MapControllers();
 app.MapHealthChecks("/health");
 app.MapFallbackToFile("index.html");

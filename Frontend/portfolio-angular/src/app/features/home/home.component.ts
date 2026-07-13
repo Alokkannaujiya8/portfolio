@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
   isSubmitting = signal<boolean>(false);
   downloadResumeUrl = this.dataService.downloadResumeUrl();
 
-  roles: string[] = ['ASP.NET Developer', 'Problem Solver', 'Software Engineer'];
+  roles: string[] = ['ASP.NET Developer', 'Problem Solver', 'Web Developer'];
   currentRoleIndex = 0;
   currentCharIndex = 0;
   isDeleting = false;
@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
     this.dataService.getHero().subscribe(res => {
       this.hero.set(res);
       if (res?.subtitle) {
-        this.roles = [res.subtitle, 'Problem Solver', 'Software Engineer'];
+        this.roles = [res.subtitle, 'Problem Solver', 'Web Developer'];
       }
       this.startTypewriterEffect();
     });

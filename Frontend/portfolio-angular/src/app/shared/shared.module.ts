@@ -20,9 +20,12 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { PublicLayoutComponent } from './layouts/public-layout/public-layout.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { NotificationBellComponent } from './components/notification-bell/notification-bell.component';
 
 const MATERIAL_MODULES = [
   MatToolbarModule,
@@ -43,13 +46,16 @@ const MATERIAL_MODULES = [
   MatTabsModule,
   MatMenuModule,
   MatExpansionModule,
-  MatDialogModule
+  MatDialogModule,
+  MatBadgeModule,
+  MatPaginatorModule
 ];
 
 @NgModule({
   declarations: [
     PublicLayoutComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    NotificationBellComponent
   ],
   imports: [
     CommonModule,
@@ -61,6 +67,7 @@ const MATERIAL_MODULES = [
     RouterModule,
     PublicLayoutComponent,
     AdminLayoutComponent,
+    NotificationBellComponent,
     ...MATERIAL_MODULES
   ]
 })

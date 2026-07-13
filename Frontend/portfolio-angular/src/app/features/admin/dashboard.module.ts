@@ -18,12 +18,14 @@ import { MessagesAdminComponent } from './messages/messages-admin.component';
 import { SettingsAdminComponent } from './settings/settings-admin.component';
 import { CommentsAdminComponent } from './comments/comments-admin.component';
 import { ResumeViewsComponent } from './resume-views/resume-views.component';
+import { NotificationsListComponent } from './notifications/notifications-list.component';
 
 const ADMIN_COMPONENTS = [
   DashboardComponent,
   ProfileAdminComponent,
   CommentsAdminComponent,
   ResumeViewsComponent,
+  NotificationsListComponent,
   ProjectsAdminComponent,
   SkillsAdminComponent,
   ExperienceAdminComponent,

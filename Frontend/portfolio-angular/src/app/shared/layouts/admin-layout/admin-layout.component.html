@@ -16,6 +16,9 @@
         <mat-icon>refresh</mat-icon>
       </button>
 
+      <!-- Notification Bell -->
+      <app-notification-bell></app-notification-bell>
+
       <!-- Theme Toggle Button -->
       <button mat-icon-button (click)="themeService.toggleTheme()" class="header-action-btn" title="Toggle Theme">
         <mat-icon>{{ themeService.isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
@@ -126,6 +129,10 @@
         <a mat-list-item routerLink="/admin/creator-views" routerLinkActive="active-link">
           <mat-icon matListItemIcon>video_camera_front</mat-icon>
           <span matListItemTitle>Creator Views</span>
+        </a>
+        <a mat-list-item routerLink="/admin/notifications" routerLinkActive="active-link">
+          <mat-icon matListItemIcon>notifications</mat-icon>
+          <span matListItemTitle>Notifications</span>
         </a>
         <hr class="nav-divider" />
         <a mat-list-item routerLink="/" target="_blank">

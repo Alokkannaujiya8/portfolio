@@ -19,6 +19,7 @@ import { BlogsAdminComponent } from './features/admin/blogs/blogs-admin.componen
 import { GalleryAdminComponent } from './features/admin/gallery/gallery-admin.component';
 import { MessagesAdminComponent } from './features/admin/messages/messages-admin.component';
 import { SettingsAdminComponent } from './features/admin/settings/settings-admin.component';
+import { NotificationsListComponent } from './features/admin/notifications/notifications-list.component';
 import { authGuard } from './core/guards/auth.guard';
 
 
@@ -58,6 +59,7 @@ const routes: Routes = [
       { path: 'consumer-views', component: DashboardComponent },
       { path: 'creator-views', component: DashboardComponent },
       { path: 'ai-video', component: DashboardComponent },
+      { path: 'notifications', component: NotificationsListComponent },
       { path: 'settings', component: SettingsAdminComponent }
     ]
   },

@@ -8,8 +8,6 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './features/home/home.module';
-import { AuthenticationModule } from './features/login/login.module';
-import { DashboardModule } from './features/admin/dashboard.module';
 import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -24,8 +22,6 @@ import { ToastrModule } from 'ngx-toastr';
     CoreModule,
     SharedModule,
     HomeModule,
-    AuthenticationModule,
-    DashboardModule,
     ToastrModule.forRoot({
       timeOut: 4000,
       positionClass: 'toast-bottom-right',

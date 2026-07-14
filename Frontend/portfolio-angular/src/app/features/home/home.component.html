@@ -67,7 +67,7 @@
         <div class="about-image-wrapper">
           <div class="rotated-border"></div>
           <img [src]="hero()?.imageUrl ? getFullUrl(hero().imageUrl) : 'assets/images/placeholder.jpg'" 
-               alt="Profile picture" class="profile-img" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300'" />
+               alt="Profile picture" class="profile-img" width="280" height="350" fetchpriority="high" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300'" />
           
           <!-- Floating badge: Projects Done (Top-Right) -->
           <div class="floating-badge-card projects-badge">
@@ -303,7 +303,7 @@
         <mat-card class="project-card hover-lift">
           <div class="project-image-container">
             <img [src]="project.imageUrl ? getFullUrl(project.imageUrl) : 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=400'" 
-                 alt="Project banner" class="project-img" />
+                 alt="Project banner" class="project-img" width="400" height="200" loading="lazy" />
             <div class="project-overlay">
               @if (project.githubUrl) {
                 <a mat-mini-fab color="accent" [href]="project.githubUrl" target="_blank" title="GitHub Source">
@@ -388,7 +388,7 @@
     <div class="gallery-grid">
       @for (item of gallery(); track item.id) {
         <div class="gallery-item hover-lift">
-          <img [src]="getFullUrl(item.imageUrl)" [alt]="item.title" class="gallery-img" />
+          <img [src]="getFullUrl(item.imageUrl)" [alt]="item.title" class="gallery-img" width="300" height="220" loading="lazy" />
           <div class="gallery-caption">
             <h4>{{ item.title }}</h4>
             <span>{{ item.category }}</span>
@@ -410,7 +410,7 @@
       @for (blog of blogs(); track blog.id) {
         <mat-card class="blog-preview-card hover-lift">
           <img [src]="blog.imageUrl ? getFullUrl(blog.imageUrl) : 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?q=80&w=400'" 
-               alt="Blog cover image" class="blog-preview-img" />
+               alt="Blog cover image" class="blog-preview-img" width="400" height="200" loading="lazy" />
           <mat-card-content class="blog-preview-details">
             <span class="blog-preview-date">{{ blog.publishedAt || blog.createdAt | date:'MMMM d, yyyy' }}</span>
             <h3 class="blog-preview-title">{{ blog.title }}</h3>

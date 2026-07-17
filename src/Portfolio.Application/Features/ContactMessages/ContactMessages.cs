@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.Logging;
+using Portfolio.Application.DTOs.Notification;
+using Portfolio.Application.Interfaces.Services;
 using Portfolio.Domain.Entities;
 
 namespace Portfolio.Application.Features.ContactMessages;
@@ -63,15 +66,27 @@ public class SubmitContactMessageCommandHandler : IRequestHandler<SubmitContactM
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly INotificationService _notificationService;
+    private readonly IWhatsAppService _whatsAppService;
+    private readonly ILogger<SubmitContactMessageCommandHandler> _logger;
 
-    public SubmitContactMessageCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    public SubmitContactMessageCommandHandler(
+        IUnitOfWork unitOfWork,
+        IMapper mapper,
+        INotificationService notificationService,
+        IWhatsAppService whatsAppService,
+        ILogger<SubmitContactMessageCommandHandler> _loggerInstance)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _notificationService = notificationService;
+        _whatsAppService = whatsAppService;
+        _logger = _loggerInstance;
     }
 
     public async Task<ContactMessageDto> Handle(SubmitContactMessageCommand request, CancellationToken cancellationToken)
     {
+        // 1. Save ContactMessage first
         var msg = new ContactMessage
         {
             Name = request.Name,
@@ -83,6 +98,34 @@ public class SubmitContactMessageCommandHandler : IRequestHandler<SubmitContactM
 
         await _unitOfWork.Repository<ContactMessage>().AddAsync(msg);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        // 2. Trigger SignalR notification (via INotificationService)
+        try
+        {
+            var notificationDto = new CreateNotificationDto
+            {
+                Title = "New Contact Inquiry",
+                Message = $"You have a new inquiry from {msg.Name} ({msg.Email})",
+                Type = "Info",
+                RedirectUrl = "/admin/messages"
+            };
+
+            await _notificationService.CreateAsync(notificationDto, cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to create SignalR/System notification for contact message ID: {MessageId}", msg.Id);
+        }
+
+        // 3. Trigger WhatsApp notification
+        try
+        {
+            await _whatsAppService.SendContactInquiryNotificationAsync(msg, cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to send WhatsApp notification for contact message ID: {MessageId}", msg.Id);
+        }
 
         return _mapper.Map<ContactMessageDto>(msg);
     }

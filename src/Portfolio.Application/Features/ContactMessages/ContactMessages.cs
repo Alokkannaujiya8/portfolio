@@ -67,20 +67,17 @@ public class SubmitContactMessageCommandHandler : IRequestHandler<SubmitContactM
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
     private readonly INotificationService _notificationService;
-    private readonly IWhatsAppService _whatsAppService;
     private readonly ILogger<SubmitContactMessageCommandHandler> _logger;
 
     public SubmitContactMessageCommandHandler(
         IUnitOfWork unitOfWork,
         IMapper mapper,
         INotificationService notificationService,
-        IWhatsAppService whatsAppService,
         ILogger<SubmitContactMessageCommandHandler> _loggerInstance)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
         _notificationService = notificationService;
-        _whatsAppService = whatsAppService;
         _logger = _loggerInstance;
     }
 
@@ -115,16 +112,6 @@ public class SubmitContactMessageCommandHandler : IRequestHandler<SubmitContactM
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to create SignalR/System notification for contact message ID: {MessageId}", msg.Id);
-        }
-
-        // 3. Trigger WhatsApp notification
-        try
-        {
-            await _whatsAppService.SendContactInquiryNotificationAsync(msg, cancellationToken);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Failed to send WhatsApp notification for contact message ID: {MessageId}", msg.Id);
         }
 
         return _mapper.Map<ContactMessageDto>(msg);

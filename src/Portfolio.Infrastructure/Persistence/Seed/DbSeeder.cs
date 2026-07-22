@@ -78,18 +78,19 @@ public static class DbSeeder
             {
                 Title = "About Me",
                 Subtitle = "Designing and building scalable enterprise web applications",
-                Description = "Motivated ASP.NET Developer with 8 months of hands-on industry experience building scalable web applications using ASP.NET Core, RESTful APIs, and Angular. Passionate about clean architecture and contributing to high-impact software projects. Seeking a challenging role to grow technically and deliver production-grade solutions.",
+                Description = "Motivated ASP.NET Developer with 11 months of hands-on industry experience building scalable web applications using ASP.NET Core, RESTful APIs, and Angular. Passionate about clean architecture and contributing to high-impact software projects. Seeking a challenging role to grow technically and deliver production-grade solutions.",
                 ImageUrl = "uploads/profile.jpg",
                 Location = "New Delhi",
                 Email = "alokkanojiya96@gmail.com",
                 Phone = "8299078491",
-                ExperienceYears = 0,
+                ExperienceYears = 1,
                 ProjectsCompleted = 3
             });
         }
         else
         {
             about.ImageUrl = "uploads/profile.jpg";
+            about.Description = "Motivated ASP.NET Developer with 11 months of hands-on industry experience building scalable web applications using ASP.NET Core, RESTful APIs, and Angular. Passionate about clean architecture and contributing to high-impact software projects. Seeking a challenging role to grow technically and deliver production-grade solutions.";
             context.Abouts.Update(about);
         }
 
@@ -157,7 +158,13 @@ public static class DbSeeder
         }
 
         // 7. Seed Experience
-        if (!context.Experiences.Any())
+        var jogazExp = context.Experiences.FirstOrDefault(e => e.Company.Contains("Jogaz Info"));
+        if (jogazExp != null)
+        {
+            jogazExp.StartDate = new DateTime(2025, 8, 1);
+            context.Experiences.Update(jogazExp);
+        }
+        else if (!context.Experiences.Any())
         {
             context.Experiences.AddRange(new List<Experience>
             {

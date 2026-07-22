@@ -66,8 +66,8 @@
       <div class="about-image-column">
         <div class="about-image-wrapper">
           <div class="rotated-border"></div>
-          <img [src]="hero()?.imageUrl ? getFullUrl(hero().imageUrl) : 'assets/images/placeholder.jpg'" 
-               alt="Profile picture" class="profile-img" width="280" height="350" fetchpriority="high" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300'" />
+          <img [src]="hero()?.imageUrl ? getFullUrl(hero().imageUrl) : 'profile.jpg'" 
+               alt="Profile picture" class="profile-img" width="280" height="350" fetchpriority="high" onerror="this.onerror=null; this.src='profile.jpg'" />
           
           <!-- Floating badge: Projects Done (Top-Right) -->
           <div class="floating-badge-card projects-badge">

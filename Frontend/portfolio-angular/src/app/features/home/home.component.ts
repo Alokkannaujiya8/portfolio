@@ -116,9 +116,13 @@ export class HomeComponent implements OnInit {
   }
 
   getFullUrl(relativePath: string): string {
-    if (relativePath.startsWith('http')) return relativePath;
+    if (!relativePath) return 'profile.jpg';
+    if (relativePath.startsWith('http://') || relativePath.startsWith('https://')) return relativePath;
     const cleanPath = relativePath.startsWith('/') ? relativePath.substring(1) : relativePath;
-    return `${window.location.protocol}//${window.location.host}/${cleanPath}`;
+    if (cleanPath.startsWith('uploads/')) {
+      return `http://localhost:5197/${cleanPath}`;
+    }
+    return cleanPath;
   }
 
   viewBlog(slug: string) {

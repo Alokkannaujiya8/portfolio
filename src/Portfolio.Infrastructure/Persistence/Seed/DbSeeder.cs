@@ -51,7 +51,8 @@ public static class DbSeeder
         }
 
         // 3. Seed Hero
-        if (!context.Heroes.Any())
+        var hero = context.Heroes.FirstOrDefault();
+        if (hero == null)
         {
             context.Heroes.Add(new Hero
             {
@@ -63,16 +64,22 @@ public static class DbSeeder
                 SecondaryButtonText = "Contact Me"
             });
         }
+        else
+        {
+            hero.ImageUrl = "uploads/profile.jpg";
+            context.Heroes.Update(hero);
+        }
 
         // 4. Seed About
-        if (!context.Abouts.Any())
+        var about = context.Abouts.FirstOrDefault();
+        if (about == null)
         {
             context.Abouts.Add(new About
             {
                 Title = "About Me",
                 Subtitle = "Designing and building scalable enterprise web applications",
                 Description = "Motivated ASP.NET Developer with 8 months of hands-on industry experience building scalable web applications using ASP.NET Core, RESTful APIs, and Angular. Passionate about clean architecture and contributing to high-impact software projects. Seeking a challenging role to grow technically and deliver production-grade solutions.",
-                ImageUrl = "uploads/about.jpg",
+                ImageUrl = "uploads/profile.jpg",
                 Location = "New Delhi",
                 Email = "alokkanojiya96@gmail.com",
                 Phone = "8299078491",
@@ -80,8 +87,19 @@ public static class DbSeeder
                 ProjectsCompleted = 3
             });
         }
+        else
+        {
+            about.ImageUrl = "uploads/profile.jpg";
+            context.Abouts.Update(about);
+        }
 
         // 5. Seed Projects
+        var chatProject = context.Projects.FirstOrDefault(p => p.Title == "Real-Time Chat Application");
+        if (chatProject != null)
+        {
+            context.Projects.Remove(chatProject);
+        }
+
         if (!context.Projects.Any())
         {
             context.Projects.AddRange(new List<Project>
@@ -99,24 +117,13 @@ public static class DbSeeder
                 },
                 new Project
                 {
-                    Title = "Real-Time Chat Application",
-                    Description = "Built a real-time chat application with one-to-one and group messaging functionality. Implemented JWT Authentication, SignalR, and SQL Server for secure communication and message storage. Followed Clean Architecture and developed REST APIs for scalable and maintainable backend services.",
-                    ImageUrl = "uploads/projects/chat.jpg",
-                    ProjectUrl = "https://chat.example.com",
-                    GithubUrl = "https://github.com/Alokkannaujiya8",
-                    Technologies = "ASP.NET Core Web API, Angular, SignalR, SQL Server",
-                    DisplayOrder = 2,
-                    IsFeatured = true
-                },
-                new Project
-                {
                     Title = "E-Commerce Management System",
                     Description = "Developed product listing, cart, and order management modules. Implemented lazy loading, route guards, and REST APIs for product and order operations.",
                     ImageUrl = "uploads/projects/ecommerce.jpg",
                     ProjectUrl = "https://ecommerce.example.com",
                     GithubUrl = "https://github.com/Alokkannaujiya8",
                     Technologies = "Angular, TypeScript, ASP.NET Core Web API, SQL Server",
-                    DisplayOrder = 3,
+                    DisplayOrder = 2,
                     IsFeatured = true
                 }
             });
@@ -159,7 +166,7 @@ public static class DbSeeder
                     Company = "Jogaz Info Pvt. Ltd",
                     Role = "ASP.NET Developer",
                     Location = "New Delhi, India",
-                    StartDate = new DateTime(2025, 10, 1),
+                    StartDate = new DateTime(2025, 8, 1),
                     IsCurrent = true,
                     Description = "• Developing and maintaining web applications using ASP.NET Core Web API and ASP.NET Core MVC.\n• Building and consuming RESTful APIs integrated with Angular front-end components.\n• Designing and optimizing SQL Server database schemas, queries, and stored procedures.\n• Implementing role-based authentication and authorization using ASP.NET Identity.\n• Writing clean, maintainable code following Clean Architecture principles and SOLID design patterns.\n• Participating in code reviews, debugging, and performance optimization of existing modules."
                 }

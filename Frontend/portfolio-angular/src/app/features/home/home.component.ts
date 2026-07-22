@@ -4,6 +4,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataService } from '../../core/services/data.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -119,10 +120,8 @@ export class HomeComponent implements OnInit {
     if (!relativePath) return 'profile.jpg';
     if (relativePath.startsWith('http://') || relativePath.startsWith('https://')) return relativePath;
     const cleanPath = relativePath.startsWith('/') ? relativePath.substring(1) : relativePath;
-    if (cleanPath.startsWith('uploads/')) {
-      return `http://localhost:5197/${cleanPath}`;
-    }
-    return cleanPath;
+    const baseUrl = environment.apiUrl.replace(/\/api\/v1\/?$/i, '').replace(/\/+$/, '');
+    return `${baseUrl}/${cleanPath}`;
   }
 
   viewBlog(slug: string) {

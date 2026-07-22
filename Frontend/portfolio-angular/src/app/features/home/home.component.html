@@ -157,7 +157,7 @@
                 <div class="work-history-full-meta-row">
                   <mat-icon class="calendar-icon">calendar_today</mat-icon>
                   <span class="work-history-full-dates">
-                    {{ exp.startDate | date:'MMM yyyy' }} - {{ exp.isCurrent || !exp.endDate ? 'Present' : (exp.endDate | date:'MMM yyyy') }}
+                    {{ getExperienceStartDate(exp) }} - {{ exp.isCurrent || !exp.endDate ? 'Present' : (exp.endDate | date:'MMM yyyy') }}
                   </span>
                   <span class="work-history-full-badge">
                     {{ getExperienceDuration(exp.startDate, exp.endDate, exp.isCurrent) }}

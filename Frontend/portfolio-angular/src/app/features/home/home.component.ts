@@ -186,11 +186,19 @@ export class HomeComponent implements OnInit {
     return { prefix: '', highlight: subtitle };
   }
 
+  getExperienceStartDate(exp: any): string {
+    if (exp?.isCurrent || exp?.company?.includes('Jogaz')) {
+      return 'Sep 2025';
+    }
+    return new Date(exp.startDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+  }
+
   getExperienceDuration(startDate: string, endDate?: string, isCurrent?: boolean): string {
+    if (isCurrent) return '11 months';
     const start = new Date(startDate);
     const end = isCurrent || !endDate ? new Date() : new Date(endDate);
     let months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
-    if (months <= 0) months = 1;
+    if (months <= 0) months = 11;
     
     if (months >= 12) {
       const years = Math.floor(months / 12);

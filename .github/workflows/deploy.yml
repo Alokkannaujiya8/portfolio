@@ -34,7 +34,9 @@ jobs:
         dotnet-version: '9.0.x'
 
     - name: Publish ASP.NET Core WebAPI
-      run: dotnet publish src/Portfolio.WebAPI/Portfolio.WebAPI.csproj -c Release -o ./publish
+      run: |
+        dotnet publish src/Portfolio.WebAPI/Portfolio.WebAPI.csproj -c Release -o ./publish
+        echo "<html><body><h2>Updating...</h2></body></html>" > ./publish/app_offline.htm
 
     - name: FTP Deploy to MonsterASP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5

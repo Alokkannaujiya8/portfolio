@@ -43,5 +43,5 @@ jobs:
         username: site76428
         password: ${{ secrets.FTP_PASSWORD || 'Alok@123' }}
         local-dir: ./publish/
-        server-dir: /
+        server-dir: /wwwroot/
         dangerous-clean-slate: false

@@ -75,7 +75,7 @@
               <mat-icon>rocket_launch</mat-icon>
             </div>
             <div class="badge-text-info">
-              <span class="badge-val">{{ projects().length }}</span>
+              <span class="badge-val">{{ about()?.projectsCompleted != null && about()?.projectsCompleted > 0 ? about().projectsCompleted : projects().length }}</span>
               <span class="badge-lbl">Projects Done</span>
             </div>
           </div>
@@ -86,7 +86,7 @@
               <mat-icon>business_center</mat-icon>
             </div>
             <div class="badge-text-info">
-              <span class="badge-val">{{ getTotalExperienceYears() }}+</span>
+              <span class="badge-val">{{ about()?.experienceYears != null && about()?.experienceYears > 0 ? about().experienceYears : getTotalExperienceYears() }}+</span>
               <span class="badge-lbl-title">Total Experience</span>
               <span class="badge-lbl-sub">{{ getTotalExperienceString() }}</span>
             </div>

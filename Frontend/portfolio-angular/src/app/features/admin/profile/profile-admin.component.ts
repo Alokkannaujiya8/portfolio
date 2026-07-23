@@ -98,4 +98,11 @@ export class ProfileAdminComponent implements OnInit {
       }
     });
   }
+
+  getFullUrl(relativePath: string | null | undefined): string {
+    if (!relativePath) return 'profile.jpg';
+    if (relativePath.startsWith('http://') || relativePath.startsWith('https://')) return relativePath;
+    const cleanPath = relativePath.startsWith('/') ? relativePath.substring(1) : relativePath;
+    return `/${cleanPath}`;
+  }
 }

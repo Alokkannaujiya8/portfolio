@@ -109,6 +109,45 @@
           </button>
         </form>
       </mat-tab>
+
+      <!-- Profile Photo & Badges Tab -->
+      <mat-tab label="Profile Photo & Controls">
+        <div class="photo-tab-container">
+          <div class="photo-preview-section">
+            <h3 class="preview-heading">Live Profile Photo Preview</h3>
+            <div class="profile-image-preview-wrapper">
+              <div class="rotated-border-preview"></div>
+              <img [src]="getFullUrl(heroForm.get('imageUrl')?.value)" 
+                   alt="Profile Preview" class="profile-preview-img" onerror="this.onerror=null; this.src='profile.jpg'" />
+              
+              <div class="floating-badge-preview projects-preview">
+                <span class="val">{{ aboutForm.get('projectsCompleted')?.value || 0 }}</span>
+                <span class="lbl">Projects Done</span>
+              </div>
+
+              <div class="floating-badge-preview exp-preview">
+                <span class="val">{{ aboutForm.get('experienceYears')?.value || 0 }}+</span>
+                <span class="lbl">Total Experience</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="photo-form-section">
+            <h3 class="form-heading">Change Profile Picture</h3>
+            <form [formGroup]="heroForm" (ngSubmit)="onSaveHero()" class="tab-form">
+              <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Profile Photo Relative Path / Image URL</mat-label>
+                <input matInput formControlName="imageUrl" placeholder="e.g. profile.jpg or https://..." />
+                <mat-hint>Enter filename (e.g. profile.jpg, about.jpg) or full Image URL</mat-hint>
+              </mat-form-field>
+
+              <button mat-flat-button color="primary" type="submit" [disabled]="heroForm.invalid || isLoading()" class="save-btn">
+                <mat-icon>save</mat-icon> Save Profile Photo
+              </button>
+            </form>
+          </div>
+        </div>
+      </mat-tab>
     </mat-tab-group>
   </div>
 </div>

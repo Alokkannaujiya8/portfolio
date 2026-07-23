@@ -43,7 +43,7 @@ jobs:
       with:
         server: site76428.siteasp.net
         username: site76428
-        password: ${{ secrets.FTP_PASSWORD || 'Alok@123' }}
+        password: ${{ secrets.FTP_PASSWORD != '' && secrets.FTP_PASSWORD || 'Alok@123' }}
         local-dir: ./publish/
         server-dir: /wwwroot/
         dangerous-clean-slate: false
@@ -51,5 +51,6 @@ jobs:
     - name: Bring Application Online (Remove app_offline.htm)
       if: success()
       run: |
-        curl -u "site76428:${{ secrets.FTP_PASSWORD || 'Alok@123' }}" "ftp://site76428.siteasp.net/" -Q "DELE /wwwroot/app_offline.htm" || true
+        curl -s -u "site76428:Alok@123" "ftp://site76428.siteasp.net/" -Q "DELE /wwwroot/app_offline.htm" || true
+
 

@@ -1,97 +1,210 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
+  <!-- Mobile Navigation Sidenav -->
+  <mat-sidenav #drawer class="mobile-sidenav" fixedInViewport
       [attr.role]="'navigation'"
       [mode]="'over'">
-    <mat-toolbar color="primary">Menu</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item (click)="scrollTo('hero'); drawer.close()">Home</a>
-      <a mat-list-item (click)="scrollTo('about'); drawer.close()">About</a>
-      <a mat-list-item (click)="scrollTo('skills'); drawer.close()">Skills</a>
-      <a mat-list-item (click)="scrollTo('projects'); drawer.close()">Projects</a>
-      <a mat-list-item (click)="scrollTo('experience'); drawer.close()">Experience</a>
-      <a mat-list-item (click)="scrollTo('blogs'); drawer.close()">Blog</a>
-      <a mat-list-item (click)="scrollTo('gallery'); drawer.close()">Gallery</a>
-      <a mat-list-item (click)="scrollTo('contact'); drawer.close()">Contact</a>
-      <a mat-list-item routerLink="/login" (click)="drawer.close()">Admin Login</a>
+    <div class="mobile-sidenav-header">
+      <span class="nav-logo" (click)="scrollTo('hero'); drawer.close()" tabindex="0" (keydown.enter)="scrollTo('hero'); drawer.close()">
+        <span class="logo-code-symbol">&lt;/&gt;</span>
+        <span class="logo-name">{{ getLogoName() }}</span>
+      </span>
+      <button mat-icon-button (click)="drawer.close()" aria-label="Close menu" class="mobile-close-btn">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    
+    <mat-nav-list class="mobile-nav-list">
+      <a mat-list-item 
+         (click)="scrollTo('hero'); drawer.close()" 
+         [class.active]="activeSection() === 'hero'"
+         [attr.aria-current]="activeSection() === 'hero' ? 'page' : null">
+        <mat-icon class="mobile-nav-icon">home</mat-icon>
+        <span>Home</span>
+      </a>
+      <a mat-list-item 
+         (click)="scrollTo('about'); drawer.close()" 
+         [class.active]="activeSection() === 'about'"
+         [attr.aria-current]="activeSection() === 'about' ? 'page' : null">
+        <mat-icon class="mobile-nav-icon">person</mat-icon>
+        <span>About</span>
+      </a>
+      <a mat-list-item 
+         (click)="scrollTo('skills'); drawer.close()" 
+         [class.active]="activeSection() === 'skills'"
+         [attr.aria-current]="activeSection() === 'skills' ? 'page' : null">
+        <mat-icon class="mobile-nav-icon">code</mat-icon>
+        <span>Skills</span>
+      </a>
+      <a mat-list-item 
+         (click)="scrollTo('projects'); drawer.close()" 
+         [class.active]="activeSection() === 'projects'"
+         [attr.aria-current]="activeSection() === 'projects' ? 'page' : null">
+        <mat-icon class="mobile-nav-icon">space_dashboard</mat-icon>
+        <span>Projects</span>
+      </a>
+      <a mat-list-item 
+         (click)="scrollTo('experience'); drawer.close()" 
+         [class.active]="activeSection() === 'experience'"
+         [attr.aria-current]="activeSection() === 'experience' ? 'page' : null">
+        <mat-icon class="mobile-nav-icon">work</mat-icon>
+        <span>Experience</span>
+      </a>
+      <a mat-list-item 
+         (click)="scrollTo('blogs'); drawer.close()" 
+         [class.active]="activeSection() === 'blogs'"
+         [attr.aria-current]="activeSection() === 'blogs' ? 'page' : null">
+        <mat-icon class="mobile-nav-icon">article</mat-icon>
+        <span>Blog</span>
+      </a>
+      <a mat-list-item 
+         (click)="scrollTo('gallery'); drawer.close()" 
+         [class.active]="activeSection() === 'gallery'"
+         [attr.aria-current]="activeSection() === 'gallery' ? 'page' : null">
+        <mat-icon class="mobile-nav-icon">photo_library</mat-icon>
+        <span>Gallery</span>
+      </a>
+      <a mat-list-item 
+         (click)="scrollTo('contact'); drawer.close()" 
+         [class.active]="activeSection() === 'contact'"
+         [attr.aria-current]="activeSection() === 'contact' ? 'page' : null">
+        <mat-icon class="mobile-nav-icon">mail</mat-icon>
+        <span>Contact</span>
+      </a>
     </mat-nav-list>
   </mat-sidenav>
   
   <mat-sidenav-content>
-    <mat-toolbar class="navbar navbar-blur">
-      <button mat-icon-button (click)="drawer.toggle()" class="menu-btn">
-        <mat-icon>menu</mat-icon>
-      </button>
-      
-      <span class="nav-logo" (click)="scrollTo('hero')">
-        <span class="logo-code-symbol">&lt;/&gt;</span>
-        <span class="logo-name">{{ getLogoName() }}</span>
-      </span>
-      
-      <div class="nav-links">
-        <button mat-button (click)="scrollTo('hero')">Home</button>
-        <button mat-button (click)="scrollTo('about')">About</button>
-        <button mat-button (click)="scrollTo('skills')">Skills</button>
-        <button mat-button (click)="scrollTo('projects')">Projects</button>
-        <button mat-button (click)="scrollTo('experience')">Experience</button>
-        <button mat-button (click)="scrollTo('blogs')">Blog</button>
-        <button mat-button (click)="scrollTo('gallery')">Gallery</button>
-        <button mat-button (click)="scrollTo('contact')">Contact</button>
-      </div>
-      
-      <span class="spacer"></span>
-      
-      <div class="nav-actions">
-        <button mat-icon-button (click)="themeService.toggleTheme()">
-          <mat-icon>{{ themeService.isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
-        </button>
-
-        @if (authService.isAuthenticated()) {
-          <app-notification-bell></app-notification-bell>
-          <button mat-button [matMenuTriggerFor]="adminMenu" class="admin-dropdown-btn">
-            <mat-icon class="admin-user-icon">manage_accounts</mat-icon>
-            Admin
-            <mat-icon class="arrow-icon">keyboard_arrow_down</mat-icon>
+    <!-- Public Header / Sticky Navbar -->
+    <header class="site-header" [class.is-scrolled]="isScrolled()">
+      <mat-toolbar class="navbar navbar-blur">
+        <div class="navbar-container">
+          <!-- Mobile Hamburger Toggle -->
+          <button mat-icon-button 
+                  (click)="drawer.toggle()" 
+                  class="menu-btn" 
+                  [attr.aria-expanded]="drawer.opened" 
+                  aria-label="Toggle navigation menu">
+            <mat-icon>{{ drawer.opened ? 'close' : 'menu' }}</mat-icon>
           </button>
-          <mat-menu #adminMenu="matMenu" class="custom-admin-menu">
-            <a mat-menu-item routerLink="/admin">
-              <mat-icon>dashboard</mat-icon>
-              <span>Dashboard</span>
-            </a>
-            <a mat-menu-item routerLink="/admin/profile">
-              <mat-icon>person</mat-icon>
-              <span>Profile</span>
-            </a>
-            <a mat-menu-item routerLink="/admin/skills">
-              <mat-icon>format_list_bulleted</mat-icon>
-              <span>Skills</span>
-            </a>
-            <a mat-menu-item routerLink="/admin/projects">
-              <mat-icon>account_tree</mat-icon>
-              <span>Projects</span>
-            </a>
-            <a mat-menu-item routerLink="/admin/messages">
-              <mat-icon>email</mat-icon>
-              <span>Messages</span>
-            </a>
-            <a mat-menu-item routerLink="/admin/ai-video">
-              <mat-icon style="color: #eab308;">videocam</mat-icon>
-              <span style="font-weight: 600;">AI Custom Video</span>
-            </a>
-            <a mat-menu-item routerLink="/admin/settings">
-              <mat-icon>settings</mat-icon>
-              <span>Settings</span>
-            </a>
-            <hr class="menu-divider" style="border: 0; border-top: 1px solid rgba(0,0,0,0.06); margin: 4px 0;" />
-            <button mat-menu-item (click)="authService.logout()">
-              <mat-icon>logout</mat-icon>
-              <span>Logout</span>
+          
+          <!-- Brand Logo -->
+          <a class="nav-logo" 
+             (click)="scrollTo('hero')" 
+             tabindex="0" 
+             (keydown.enter)="scrollTo('hero')" 
+             aria-label="ALOK Portfolio Home">
+            <span class="logo-code-symbol">&lt;/&gt;</span>
+            <span class="logo-name">{{ getLogoName() }}</span>
+          </a>
+          
+          <!-- Desktop Navigation Links -->
+          <nav class="nav-links" aria-label="Main navigation">
+            <button mat-button 
+                    (click)="scrollTo('hero')" 
+                    [class.active]="activeSection() === 'hero'"
+                    [attr.aria-current]="activeSection() === 'hero' ? 'page' : null">
+              Home
             </button>
-          </mat-menu>
-        } @else {
-          <a mat-stroked-button routerLink="/login" class="admin-btn">Admin Portal</a>
-        }
-      </div>
-    </mat-toolbar>
+            <button mat-button 
+                    (click)="scrollTo('about')" 
+                    [class.active]="activeSection() === 'about'"
+                    [attr.aria-current]="activeSection() === 'about' ? 'page' : null">
+              About
+            </button>
+            <button mat-button 
+                    (click)="scrollTo('skills')" 
+                    [class.active]="activeSection() === 'skills'"
+                    [attr.aria-current]="activeSection() === 'skills' ? 'page' : null">
+              Skills
+            </button>
+            <button mat-button 
+                    (click)="scrollTo('projects')" 
+                    [class.active]="activeSection() === 'projects'"
+                    [attr.aria-current]="activeSection() === 'projects' ? 'page' : null">
+              Projects
+            </button>
+            <button mat-button 
+                    (click)="scrollTo('experience')" 
+                    [class.active]="activeSection() === 'experience'"
+                    [attr.aria-current]="activeSection() === 'experience' ? 'page' : null">
+              Experience
+            </button>
+            <button mat-button 
+                    (click)="scrollTo('blogs')" 
+                    [class.active]="activeSection() === 'blogs'"
+                    [attr.aria-current]="activeSection() === 'blogs' ? 'page' : null">
+              Blog
+            </button>
+            <button mat-button 
+                    (click)="scrollTo('gallery')" 
+                    [class.active]="activeSection() === 'gallery'"
+                    [attr.aria-current]="activeSection() === 'gallery' ? 'page' : null">
+              Gallery
+            </button>
+            <button mat-button 
+                    (click)="scrollTo('contact')" 
+                    [class.active]="activeSection() === 'contact'"
+                    [attr.aria-current]="activeSection() === 'contact' ? 'page' : null">
+              Contact
+            </button>
+          </nav>
+          
+          <!-- Header Actions (Right) -->
+          <div class="nav-actions">
+            <button mat-icon-button 
+                    class="theme-toggle-btn"
+                    (click)="themeService.toggleTheme()" 
+                    [attr.aria-label]="themeService.isDarkMode() ? 'Switch to light mode' : 'Switch to dark mode'">
+              <mat-icon>{{ themeService.isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+            </button>
+
+            @if (authService.isAuthenticated()) {
+              <app-notification-bell></app-notification-bell>
+              <button mat-button [matMenuTriggerFor]="adminMenu" class="admin-dropdown-btn" aria-label="Admin account menu">
+                <mat-icon class="admin-user-icon">manage_accounts</mat-icon>
+                <span class="admin-label">Admin</span>
+                <mat-icon class="arrow-icon">keyboard_arrow_down</mat-icon>
+              </button>
+              <mat-menu #adminMenu="matMenu" class="custom-admin-menu">
+                <a mat-menu-item routerLink="/admin">
+                  <mat-icon>dashboard</mat-icon>
+                  <span>Dashboard</span>
+                </a>
+                <a mat-menu-item routerLink="/admin/profile">
+                  <mat-icon>person</mat-icon>
+                  <span>Profile</span>
+                </a>
+                <a mat-menu-item routerLink="/admin/skills">
+                  <mat-icon>format_list_bulleted</mat-icon>
+                  <span>Skills</span>
+                </a>
+                <a mat-menu-item routerLink="/admin/projects">
+                  <mat-icon>account_tree</mat-icon>
+                  <span>Projects</span>
+                </a>
+                <a mat-menu-item routerLink="/admin/messages">
+                  <mat-icon>email</mat-icon>
+                  <span>Messages</span>
+                </a>
+                <a mat-menu-item routerLink="/admin/ai-video">
+                  <mat-icon style="color: #eab308;">videocam</mat-icon>
+                  <span style="font-weight: 600;">AI Custom Video</span>
+                </a>
+                <a mat-menu-item routerLink="/admin/settings">
+                  <mat-icon>settings</mat-icon>
+                  <span>Settings</span>
+                </a>
+                <hr class="menu-divider" style="border: 0; border-top: 1px solid rgba(255,255,255,0.08); margin: 4px 0;" />
+                <button mat-menu-item (click)="authService.logout()">
+                  <mat-icon>logout</mat-icon>
+                  <span>Logout</span>
+                </button>
+              </mat-menu>
+            }
+          </div>
+        </div>
+      </mat-toolbar>
+    </header>
     
     <div class="main-content">
       <router-outlet></router-outlet>

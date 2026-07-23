@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { ThemeService } from '../../../core/services/theme.service';
 import { DataService } from '../../../core/services/data.service';
@@ -19,6 +19,11 @@ export class PublicLayoutComponent implements OnInit {
   currentYear = new Date().getFullYear();
   about = signal<any>(null);
   hero = signal<any>(null);
+  
+  isScrolled = signal<boolean>(false);
+  activeSection = signal<string>('hero');
+
+  private sections = ['hero', 'about', 'skills', 'projects', 'experience', 'blogs', 'gallery', 'contact'];
 
   ngOnInit(): void {
     this.dataService.getAbout().subscribe({
@@ -29,9 +34,37 @@ export class PublicLayoutComponent implements OnInit {
       next: (res) => this.hero.set(res),
       error: () => {}
     });
+    
+    this.onWindowScroll();
+  }
+
+  @HostListener('window:scroll')
+  onWindowScroll(): void {
+    const scrollPosition = window.scrollY || document.documentElement.scrollTop || 0;
+    this.isScrolled.set(scrollPosition > 20);
+    
+    if (this.router.url === '/' || this.router.url === '') {
+      this.updateActiveSection(scrollPosition);
+    }
+  }
+
+  private updateActiveSection(scrollPosition: number): void {
+    const offset = 140;
+    for (let i = this.sections.length - 1; i >= 0; i--) {
+      const sectionId = this.sections[i];
+      const el = document.getElementById(sectionId);
+      if (el) {
+        const top = el.offsetTop - offset;
+        if (scrollPosition >= top) {
+          this.activeSection.set(sectionId);
+          break;
+        }
+      }
+    }
   }
 
   scrollTo(sectionId: string): void {
+    this.activeSection.set(sectionId);
     if (this.router.url !== '/') {
       this.router.navigate(['/']).then(() => {
         setTimeout(() => this.scrollElement(sectionId), 200);

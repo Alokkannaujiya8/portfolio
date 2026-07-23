@@ -103,28 +103,28 @@
         </p>
         
         <div class="about-meta-grid">
-          <div class="meta-item">
+          <a href="mailto:alokkanojiya96@gmail.com" class="meta-item meta-item-link" title="Send Email">
             <mat-icon class="meta-icon">email</mat-icon>
             <div class="meta-content">
               <span class="meta-label">Email</span>
-              <span class="meta-value">{{ about()?.email || 'N/A' }}</span>
+              <span class="meta-value">{{ about()?.email || 'alokkanojiya96@gmail.com' }}</span>
             </div>
-          </div>
-          <div class="meta-item">
+          </a>
+          <a href="tel:+918299078491" class="meta-item meta-item-link" title="Call Phone">
             <mat-icon class="meta-icon">phone</mat-icon>
             <div class="meta-content">
               <span class="meta-label">Phone</span>
-              <span class="meta-value">{{ about()?.phone || 'N/A' }}</span>
+              <span class="meta-value">{{ about()?.phone || '+91 8299078491' }}</span>
             </div>
-          </div>
-          <div class="meta-item">
+          </a>
+          <a href="https://maps.google.com/?q=New+Delhi" target="_blank" rel="noopener noreferrer" class="meta-item meta-item-link" title="View Location">
             <mat-icon class="meta-icon">location_on</mat-icon>
             <div class="meta-content">
               <span class="meta-label">Location</span>
-              <span class="meta-value">{{ about()?.location || 'Remote' }}</span>
+              <span class="meta-value">{{ about()?.location || 'New Delhi, India' }}</span>
             </div>
-          </div>
-          <div class="meta-item">
+          </a>
+          <div class="meta-item meta-item-static">
             <mat-icon class="meta-icon">public</mat-icon>
             <div class="meta-content">
               <span class="meta-label">Freelance</span>
@@ -439,18 +439,32 @@
         <p>Fill out the contact form, and I will get back to you as soon as possible. Alternatively, feel free to send a message via email.</p>
         
         <div class="contact-meta-list">
-          <div class="contact-meta-item">
+          <a href="mailto:alokkanojiya96@gmail.com" class="contact-meta-item contact-meta-link" title="Send Email">
             <mat-icon>mail</mat-icon>
             <div>
               <h4>Email</h4>
-              <p>{{ about()?.email || 'N/A' }}</p>
+              <p>{{ about()?.email || 'alokkanojiya96@gmail.com' }}</p>
             </div>
-          </div>
-          <div class="contact-meta-item">
+          </a>
+          <a href="tel:+918299078491" class="contact-meta-item contact-meta-link" title="Call Phone">
+            <mat-icon>phone</mat-icon>
+            <div>
+              <h4>Phone</h4>
+              <p>{{ about()?.phone || '+91 8299078491' }}</p>
+            </div>
+          </a>
+          <a href="https://maps.google.com/?q=New+Delhi" target="_blank" rel="noopener noreferrer" class="contact-meta-item contact-meta-link" title="View Address">
             <mat-icon>location_on</mat-icon>
             <div>
               <h4>Address</h4>
-              <p>{{ about()?.location || 'Remote' }}</p>
+              <p>{{ about()?.location || 'New Delhi, India' }}</p>
+            </div>
+          </a>
+          <div class="contact-meta-item contact-meta-static">
+            <mat-icon>public</mat-icon>
+            <div>
+              <h4>Freelance</h4>
+              <p>Available</p>
             </div>
           </div>
         </div>

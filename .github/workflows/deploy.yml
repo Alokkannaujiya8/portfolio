@@ -47,3 +47,9 @@ jobs:
         local-dir: ./publish/
         server-dir: /wwwroot/
         dangerous-clean-slate: false
+
+    - name: Bring Application Online (Remove app_offline.htm)
+      if: success()
+      run: |
+        curl -u "site76428:${{ secrets.FTP_PASSWORD || 'Alok@123' }}" "ftp://site76428.siteasp.net/" -Q "DELE /wwwroot/app_offline.htm" || true
+

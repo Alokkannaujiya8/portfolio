@@ -28,6 +28,9 @@ jobs:
       run: npm run build -- --configuration production
       working-directory: Frontend/portfolio-angular
 
+    - name: Copy Angular Build to WebAPI wwwroot
+      run: cp -r Frontend/portfolio-angular/dist/portfolio-angular/browser/* src/Portfolio.WebAPI/wwwroot/
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:

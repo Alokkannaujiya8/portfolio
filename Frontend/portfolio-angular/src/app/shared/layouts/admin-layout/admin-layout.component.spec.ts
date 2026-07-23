@@ -6,8 +6,10 @@ import { ThemeService } from '../../../core/services/theme.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AdminLayoutComponent', () => {
   let authServiceMock: any;
@@ -30,6 +32,7 @@ describe('AdminLayoutComponent', () => {
         MatToolbarModule,
         MatSidenavModule,
         MatListModule,
+        MatMenuModule,
         BrowserAnimationsModule,
         HttpClientTestingModule
       ],
@@ -39,7 +42,8 @@ describe('AdminLayoutComponent', () => {
       providers: [
         { provide: AuthService, useValue: authServiceMock },
         { provide: ThemeService, useValue: themeServiceMock }
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 

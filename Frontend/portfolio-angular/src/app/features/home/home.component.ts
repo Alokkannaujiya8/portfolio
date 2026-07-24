@@ -225,11 +225,11 @@ export class HomeComponent implements OnInit {
 
     let result = '';
     if (years > 0) {
-      result += `${years} yr${years > 1 ? 's' : ''}`;
+      result += `${years} year${years > 1 ? 's' : ''}`;
     }
     if (remainingMonths > 0) {
       if (result) result += ' ';
-      result += `${remainingMonths} mo${remainingMonths > 1 ? 's' : ''}`;
+      result += `${remainingMonths} month${remainingMonths > 1 ? 's' : ''}`;
     }
     return result || '11 months';
   }

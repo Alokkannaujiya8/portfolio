@@ -13,7 +13,7 @@
   </div>
 
   @if (isLoading()) {
-    <mat-progress-bar mode="indeterminate" class="mb-4"></mat-progress-bar>
+  <mat-progress-bar mode="indeterminate" class="mb-4"></mat-progress-bar>
   }
 
   <div class="profile-card">
@@ -53,7 +53,8 @@
             </mat-form-field>
           </div>
 
-          <button mat-flat-button color="primary" type="submit" [disabled]="heroForm.invalid || isLoading()" class="save-btn">
+          <button mat-flat-button color="primary" type="submit" [disabled]="heroForm.invalid || isLoading()"
+            class="save-btn">
             Save Hero Configuration
           </button>
         </form>
@@ -104,7 +105,8 @@
             </mat-form-field>
           </div>
 
-          <button mat-flat-button color="primary" type="submit" [disabled]="aboutForm.invalid || isLoading()" class="save-btn">
+          <button mat-flat-button color="primary" type="submit" [disabled]="aboutForm.invalid || isLoading()"
+            class="save-btn">
             Save About Biography
           </button>
         </form>
@@ -117,9 +119,9 @@
             <h3 class="preview-heading">Live Profile Photo Preview</h3>
             <div class="profile-image-preview-wrapper">
               <div class="rotated-border-preview"></div>
-              <img [src]="getFullUrl(heroForm.get('imageUrl')?.value)" 
-                   alt="Profile Preview" class="profile-preview-img" onerror="this.onerror=null; this.src='profile.jpg'" />
-              
+              <img [src]="getFullUrl(heroForm.get('imageUrl')?.value)" alt="Profile Preview" class="profile-preview-img"
+                onerror="this.onerror=null; this.src='profile.jpg'" />
+
               <div class="floating-badge-preview projects-preview">
                 <span class="val">{{ aboutForm.get('projectsCompleted')?.value || 0 }}</span>
                 <span class="lbl">Projects Done</span>
@@ -137,7 +139,8 @@
 
             <div class="file-upload-box">
               <input type="file" #fileInput hidden (change)="onFileSelected($event)" accept="image/*" />
-              <button type="button" mat-stroked-button color="accent" (click)="fileInput.click()" [disabled]="isUploadingImage()">
+              <button type="button" mat-stroked-button color="accent" (click)="fileInput.click()"
+                [disabled]="isUploadingImage()">
                 <mat-icon>cloud_upload</mat-icon>
                 {{ isUploadingImage() ? 'Uploading Photo...' : 'Upload Photo From Device' }}
               </button>
@@ -151,7 +154,8 @@
                 <mat-hint>Enter filename (e.g. profile.jpg) or image URL</mat-hint>
               </mat-form-field>
 
-              <button mat-flat-button color="primary" type="submit" [disabled]="heroForm.invalid || isLoading()" class="save-btn">
+              <button mat-flat-button color="primary" type="submit" [disabled]="heroForm.invalid || isLoading()"
+                class="save-btn">
                 <mat-icon>save</mat-icon> Save Profile Photo
               </button>
             </form>

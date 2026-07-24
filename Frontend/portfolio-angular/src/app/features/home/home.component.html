@@ -99,7 +99,7 @@
         <h3 class="about-heading-title">I'm <span class="highlight-cyan">{{ getFormattedTitle().name }}</span></h3>
         <h4 class="about-subheading">{{ hero()?.subtitle }}</h4>
         <p class="about-text-desc">
-          {{ about()?.description || 'Motivated ASP.NET Developer with 8 months of hands-on industry experience building scalable web applications using ASP.NET Core, RESTful APIs, and Angular.' }}
+          {{ getAboutDescription() }}
         </p>
         
         <div class="about-meta-grid">

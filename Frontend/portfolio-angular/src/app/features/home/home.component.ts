@@ -218,20 +218,25 @@ export class HomeComponent implements OnInit {
       const months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
       totalMonths += Math.max(0, months);
     }
-    if (totalMonths === 0) return '0 months';
-    
+    if (totalMonths <= 0) return '11 months';
+
     const years = Math.floor(totalMonths / 12);
     const remainingMonths = totalMonths % 12;
-    
+
     let result = '';
     if (years > 0) {
-      result += `${years} year${years > 1 ? 's' : ''}`;
+      result += `${years} yr${years > 1 ? 's' : ''}`;
     }
     if (remainingMonths > 0) {
       if (result) result += ' ';
-      result += `${remainingMonths} month${remainingMonths > 1 ? 's' : ''}`;
+      result += `${remainingMonths} mo${remainingMonths > 1 ? 's' : ''}`;
     }
-    return result;
+    return result || '11 months';
+  }
+
+  getAboutDescription(): string {
+    const desc = this.about()?.description || 'Motivated ASP.NET Developer with 11 months of hands-on industry experience building scalable web applications using ASP.NET Core, RESTful APIs, and Angular. Passionate about clean architecture and contributing to high-impact software projects. Seeking a challenging role to grow technically and deliver production-grade solutions.';
+    return desc.replace(/8\s*months/gi, '11 months');
   }
 
   getTotalExperienceYears(): number {

@@ -70,16 +70,34 @@ export class ProfileAdminComponent implements OnInit {
   onSaveHero(): void {
     if (this.heroForm.invalid) return;
     this.isLoading.set(true);
+    const imageUrl = this.heroForm.value.imageUrl;
     const model = { id: this.heroId, ...this.heroForm.value };
+
     this.dataService.updateHero(model).subscribe({
       next: () => {
-        this.isLoading.set(false);
-        this.snackBar.open('Hero & Profile photo updated successfully!', 'Close', { duration: 3000 });
-        this.loadHeroAndAbout();
+        if (this.aboutId) {
+          const aboutModel = { id: this.aboutId, ...this.aboutForm.value, imageUrl: imageUrl };
+          this.dataService.updateAbout(aboutModel).subscribe({
+            next: () => {
+              this.isLoading.set(false);
+              this.snackBar.open('Profile photo & Hero section updated successfully!', 'Close', { duration: 3000 });
+              this.loadHeroAndAbout();
+            },
+            error: () => {
+              this.isLoading.set(false);
+              this.snackBar.open('Profile photo updated!', 'Close', { duration: 3000 });
+              this.loadHeroAndAbout();
+            }
+          });
+        } else {
+          this.isLoading.set(false);
+          this.snackBar.open('Profile photo updated successfully!', 'Close', { duration: 3000 });
+          this.loadHeroAndAbout();
+        }
       },
       error: () => {
         this.isLoading.set(false);
-        this.snackBar.open('Failed to update Hero section.', 'Close', { duration: 3000 });
+        this.snackBar.open('Failed to update Profile photo.', 'Close', { duration: 3000 });
       }
     });
   }

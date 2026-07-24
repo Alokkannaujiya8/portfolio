@@ -66,7 +66,7 @@
       <div class="about-image-column">
         <div class="about-image-wrapper">
           <div class="rotated-border"></div>
-          <img [src]="hero()?.imageUrl ? getFullUrl(hero().imageUrl) : 'profile.jpg'" 
+          <img [src]="hero()?.imageUrl ? getFullUrl(hero().imageUrl) : (about()?.imageUrl ? getFullUrl(about().imageUrl) : 'profile.jpg')" 
                alt="Profile picture" class="profile-img" width="280" height="350" fetchpriority="high" onerror="this.onerror=null; this.src='profile.jpg'" />
           
           <!-- Floating badge: Projects Done (Top-Right) -->

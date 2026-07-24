@@ -64,7 +64,7 @@ public static class DbSeeder
                 SecondaryButtonText = "Contact Me"
             });
         }
-        else if (string.IsNullOrEmpty(hero.ImageUrl) || hero.ImageUrl == "uploads/profile.jpg")
+        else
         {
             hero.ImageUrl = "uploads/Alok.jpeg";
             context.Heroes.Update(hero);
@@ -87,7 +87,7 @@ public static class DbSeeder
                 ProjectsCompleted = 3
             });
         }
-        else if (string.IsNullOrEmpty(about.ImageUrl) || about.ImageUrl == "uploads/profile.jpg")
+        else
         {
             about.ImageUrl = "uploads/Alok.jpeg";
             about.Description = "Motivated ASP.NET Developer with 11 months of hands-on industry experience building scalable web applications using ASP.NET Core, RESTful APIs, and Angular. Passionate about clean architecture and contributing to high-impact software projects. Seeking a challenging role to grow technically and deliver production-grade solutions.";

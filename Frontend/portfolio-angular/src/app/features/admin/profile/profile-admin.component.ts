@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataService } from '../../../core/services/data.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-profile-admin',
@@ -17,6 +18,7 @@ export class ProfileAdminComponent implements OnInit {
   heroId: string = '';
   aboutId: string = '';
   isLoading = signal<boolean>(false);
+  isUploadingImage = signal<boolean>(false);
 
   heroForm = this.fb.group({
     title: ['', Validators.required],
@@ -72,7 +74,7 @@ export class ProfileAdminComponent implements OnInit {
     this.dataService.updateHero(model).subscribe({
       next: () => {
         this.isLoading.set(false);
-        this.snackBar.open('Hero section updated successfully!', 'Close', { duration: 3000 });
+        this.snackBar.open('Hero & Profile photo updated successfully!', 'Close', { duration: 3000 });
         this.loadHeroAndAbout();
       },
       error: () => {
@@ -99,10 +101,32 @@ export class ProfileAdminComponent implements OnInit {
     });
   }
 
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+    if (!file) return;
+
+    this.isUploadingImage.set(true);
+    this.dataService.uploadImage(file).subscribe({
+      next: (res) => {
+        this.isUploadingImage.set(false);
+        if (res?.imageUrl) {
+          this.heroForm.patchValue({ imageUrl: res.imageUrl });
+          this.aboutForm.patchValue({ imageUrl: res.imageUrl });
+          this.snackBar.open('Image uploaded successfully! Click Save to apply.', 'Close', { duration: 4000 });
+        }
+      },
+      error: () => {
+        this.isUploadingImage.set(false);
+        this.snackBar.open('Image upload failed. Please try again.', 'Close', { duration: 4000 });
+      }
+    });
+  }
+
   getFullUrl(relativePath: string | null | undefined): string {
     if (!relativePath) return 'profile.jpg';
     if (relativePath.startsWith('http://') || relativePath.startsWith('https://')) return relativePath;
     const cleanPath = relativePath.startsWith('/') ? relativePath.substring(1) : relativePath;
-    return `/${cleanPath}`;
+    const baseUrl = environment.apiUrl.replace(/\/api\/v1\/?$/i, '').replace(/\/+$/, '');
+    return `${baseUrl}/${cleanPath}`;
   }
 }

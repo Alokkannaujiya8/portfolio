@@ -195,6 +195,28 @@
     margin: 0 0 16px 0;
   }
 
+  .file-upload-box {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px dashed rgba(0, 229, 255, 0.3);
+    border-radius: 12px;
+    align-items: flex-start;
+
+    button {
+      border-color: #00e5ff !important;
+      color: #00e5ff !important;
+    }
+
+    .upload-hint {
+      font-size: 12px;
+      color: #64748b;
+    }
+  }
+
   .w-full {
     width: 100%;
   }

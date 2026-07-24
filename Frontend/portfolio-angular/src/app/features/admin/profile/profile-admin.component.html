@@ -134,11 +134,21 @@
 
           <div class="photo-form-section">
             <h3 class="form-heading">Change Profile Picture</h3>
+
+            <div class="file-upload-box">
+              <input type="file" #fileInput hidden (change)="onFileSelected($event)" accept="image/*" />
+              <button type="button" mat-stroked-button color="accent" (click)="fileInput.click()" [disabled]="isUploadingImage()">
+                <mat-icon>cloud_upload</mat-icon>
+                {{ isUploadingImage() ? 'Uploading Photo...' : 'Upload Photo From Device' }}
+              </button>
+              <span class="upload-hint">Supports .jpg, .jpeg, .png, .webp image files</span>
+            </div>
+
             <form [formGroup]="heroForm" (ngSubmit)="onSaveHero()" class="tab-form">
               <mat-form-field appearance="outline" class="w-full">
                 <mat-label>Profile Photo Relative Path / Image URL</mat-label>
-                <input matInput formControlName="imageUrl" placeholder="e.g. profile.jpg or https://..." />
-                <mat-hint>Enter filename (e.g. profile.jpg, about.jpg) or full Image URL</mat-hint>
+                <input matInput formControlName="imageUrl" placeholder="e.g. profile.jpg or uploads/Alok.jpeg" />
+                <mat-hint>Enter filename (e.g. profile.jpg) or image URL</mat-hint>
               </mat-form-field>
 
               <button mat-flat-button color="primary" type="submit" [disabled]="heroForm.invalid || isLoading()" class="save-btn">

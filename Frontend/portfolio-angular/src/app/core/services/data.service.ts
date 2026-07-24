@@ -217,4 +217,10 @@ export class DataService {
   deleteResume(id: string): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}/admin/resume/${id}`);
   }
+
+  uploadImage(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+    return this.http.post<any>(`${this.apiUrl}/admin/upload/image`, formData);
+  }
 }
